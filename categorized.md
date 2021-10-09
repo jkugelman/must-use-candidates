@@ -1,47 +1,23 @@
 # Misleading
 
 ```rust
-alloc/src/slice.rs:667:5                                    [u8]                                                        fn to_ascii_uppercase(&self) -> Vec<u8>;
-alloc/src/slice.rs:685:5                                    [u8]                                                        fn to_ascii_lowercase(&self) -> Vec<u8>;
-alloc/src/str.rs:371:5                                      str                                                         fn to_lowercase(&self) -> String;
-alloc/src/str.rs:451:5                                      str                                                         fn to_uppercase(&self) -> String;
-alloc/src/str.rs:539:5                                      str                                                         fn to_ascii_uppercase(&self) -> String;
-alloc/src/str.rs:570:5                                      str                                                         fn to_ascii_lowercase(&self) -> String;
-core/src/char/methods.rs:954:5                              char                                                        fn to_lowercase(self) -> ToLowercase;
-core/src/char/methods.rs:1044:5                             char                                                        fn to_uppercase(self) -> ToUppercase;
-core/src/char/methods.rs:1091:5                             char                                                        const fn to_ascii_uppercase(&self) -> char;
-core/src/char/methods.rs:1124:5                             char                                                        const fn to_ascii_lowercase(&self) -> char;
 core/src/num/f32.rs:641:5                                   core::num::f32                                              fn to_degrees(self) -> f32;
 core/src/num/f32.rs:658:5                                   core::num::f32                                              fn to_radians(self) -> f32;
 core/src/num/f64.rs:654:5                                   core::num::f64                                              fn to_degrees(self) -> f64;
 core/src/num/f64.rs:672:5                                   core::num::f64                                              fn to_radians(self) -> f64;
-core/src/num/mod.rs:288:5                                   u8                                                          const fn to_ascii_uppercase(&self) -> u8;
-core/src/num/mod.rs:312:5                                   u8                                                          const fn to_ascii_lowercase(&self) -> u8;
-core/src/num/mod.rs:774:5                                   u8                                                          fn escape_ascii(&self) -> ascii::EscapeDefault;
 core/src/num/saturating.rs:542:13                           core::num::Saturating<$Int>                                 const fn rotate_left(self, n: u32) -> Self;
 core/src/num/saturating.rs:568:13                           core::num::Saturating<$Int>                                 const fn rotate_right(self, n: u32) -> Self;
 core/src/num/wrapping.rs:537:13                             core::num::Wrapping<$Int>                                   const fn rotate_left(self, n: u32) -> Self;
 core/src/num/wrapping.rs:563:13                             core::num::Wrapping<$Int>                                   const fn rotate_right(self, n: u32) -> Self;
-core/src/slice/ascii.rs:76:5                                slice                                                       fn escape_ascii(&self) -> EscapeAscii<'_>;
-core/src/str/mod.rs:803:5                                   str                                                         fn split_whitespace(&self) -> SplitWhitespace<'_>;
-core/src/str/mod.rs:844:5                                   str                                                         fn split_ascii_whitespace(&self) -> SplitAsciiWhitespace<'_>;
-core/src/str/mod.rs:918:5                                   str                                                         fn encode_utf16(&self) -> EncodeUtf16<'_>;
-core/src/str/mod.rs:1850:5                                  str                                                         fn trim_left(&self) -> &str;
-core/src/str/mod.rs:1892:5                                  str                                                         fn trim_right(&self) -> &str;
-core/src/str/mod.rs:2350:5                                  str                                                         fn escape_debug(&self) -> EscapeDebug<'_>;
-core/src/str/mod.rs:2394:5                                  str                                                         fn escape_default(&self) -> EscapeDefault<'_>;
-core/src/str/mod.rs:2430:5                                  str                                                         fn escape_unicode(&self) -> EscapeUnicode<'_>;
-std/src/ffi/os_str.rs:781:5                                 std::ffi::OsStr                                             fn to_ascii_lowercase(&self) -> OsString;
-std/src/ffi/os_str.rs:802:5                                 std::ffi::OsStr                                             fn to_ascii_uppercase(&self) -> OsString;
 std/src/net/ip.rs:423:5                                     std::net::IpAddr                                            const fn to_canonical(&self) -> IpAddr;
 std/src/net/ip.rs:1683:5                                    std::net::Ipv6Addr                                          const fn to_canonical(&self) -> IpAddr;
-std/src/path.rs:2510:5                                      std::path::Path                                             fn display(&self) -> Display<'_>;
 
 alloc/src/rc.rs:2226:5                                      alloc::rc::Weak<T>                                          fn upgrade(&self) -> Option<Rc<T>>;
 alloc/src/sync.rs:894:5                                     alloc::sync::Arc<T>                                         fn downgrade(this: &Self) -> Weak<T>;
 alloc/src/sync.rs:1856:5                                    alloc::sync::Weak<T>                                        fn upgrade(&self) -> Option<Arc<T>>;
 core/src/alloc/layout.rs:115:5                              core::alloc::Layout                                         const fn align(&self) -> usize;
 core/src/alloc/layout.rs:264:5                              core::alloc::Layout                                         fn pad_to_align(&self) -> Layout;
+std/src/path.rs:2510:5                                      std::path::Path                                             fn display(&self) -> Display<'_>;
 
 core/src/num/nonzero.rs:319:17                              core::num::NonZero$Int                                      const fn checked_add(self, other: $Int) -> Option<$Ty>;
 core/src/num/nonzero.rs:352:17                              core::num::NonZero$Int                                      const fn saturating_add(self, other: $Int) -> $Ty;
