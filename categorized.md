@@ -69,16 +69,7 @@ core/src/time.rs:921:5                                      core::time::Duration
 # Discarded guard
 
 ```rust
-std/src/io/stdio.rs:304:1                                   std::io                                                     fn stdin() -> Stdin;
-std/src/io/stdio.rs:351:1                                   std::io                                                     fn stdin_locked() -> StdinLock<'static>;
-std/src/io/stdio.rs:378:5                                   std::io::Stdin                                              fn lock(&self) -> StdinLock<'_>;
 std/src/io/stdio.rs:489:5                                   std::io::Stdin                                              fn split(self, byte: u8) -> Split<StdinLock<'static>>;
-std/src/io/stdio.rs:674:1                                   std::io                                                     fn stdout() -> Stdout;
-std/src/io/stdio.rs:715:1                                   std::io                                                     fn stdout_locked() -> StdoutLock<'static>;
-std/src/io/stdio.rs:755:5                                   std::io::Stdout                                             fn lock(&self) -> StdoutLock<'_>;
-std/src/io/stdio.rs:953:1                                   std::io                                                     fn stderr() -> Stderr;
-std/src/io/stdio.rs:992:1                                   std::io                                                     fn stderr_locked() -> StderrLock<'static>;
-std/src/io/stdio.rs:1018:5                                  std::io::Stderr                                             fn lock(&self) -> StderrLock<'_>;
 ```
 
 # Discarded builder
@@ -339,6 +330,9 @@ std/src/ffi/c_str.rs:705:5                                  std::ffi::CString   
 std/src/ffi/c_str.rs:1166:5                                 std::ffi::CStr                                              unsafe fn from_ptr<'a>(ptr: *const c_char) -> &'a CStr;
 std/src/ffi/c_str.rs:1249:5                                 std::ffi::CStr                                              const unsafe fn from_bytes_with_nul_unchecked(bytes: &[u8]) -> &CStr;
 std/src/io/error.rs:477:5                                   std::io::Error                                              fn from_raw_os_error(code: i32) -> Error;
+std/src/io/stdio.rs:304:1                                   std::io                                                     fn stdin() -> Stdin;
+std/src/io/stdio.rs:674:1                                   std::io                                                     fn stdout() -> Stdout;
+std/src/io/stdio.rs:953:1                                   std::io                                                     fn stderr() -> Stderr;
 std/src/time.rs:243:5                                       std::time::Instant                                          fn now() -> Instant;
 std/src/time.rs:296:5                                       std::time::Instant                                          fn duration_since(&self, earlier: Instant) -> Duration;
 std/src/time.rs:316:5                                       std::time::Instant                                          fn checked_duration_since(&self, earlier: Instant) -> Option<Duration>;
