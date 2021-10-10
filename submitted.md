@@ -239,13 +239,21 @@ core/src/time.rs:903:5                                      core::time::Duration
 core/src/time.rs:921:5                                      core::time::Duration                                        const fn div_duration_f32(self, rhs: Duration) -> f32;
 ```
 
-# Add #[must_use] to constructors #TBD
+# Add #[must_use] to alloc constructors #89726
 
 ```rust
-alloc/src/boxed.rs:215:5                                    alloc::boxed::Box                                           fn new_uninit() -> Box<mem::MaybeUninit<T>>;
-alloc/src/boxed.rs:240:5                                    alloc::boxed::Box                                           fn new_zeroed() -> Box<mem::MaybeUninit<T>>;
-alloc/src/boxed.rs:564:5                                    alloc::boxed::Box                                           fn new_uninit_slice(len: usize) -> Box<[mem::MaybeUninit<T>]>;
-alloc/src/boxed.rs:588:5                                    alloc::boxed::Box                                           fn new_zeroed_slice(len: usize) -> Box<[mem::MaybeUninit<T>]>;
+alloc/src/boxed.rs:190:5                                    alloc::boxed::Box<T>                                        fn new() -> Self;
+alloc/src/boxed.rs:215:5                                    alloc::boxed::Box<T>                                        fn new_uninit() -> Box<mem::MaybeUninit<T>>;
+alloc/src/boxed.rs:240:5                                    alloc::boxed::Box<T>                                        fn new_zeroed() -> Box<mem::MaybeUninit<T>>;
+alloc/src/boxed.rs:249:5                                    alloc::boxed::Box<T>                                        fn pin(x: T) -> Pin<Box<T>>;
+alloc/src/boxed.rs:343:5                                    alloc::boxed::Box<T, A>                                     fn new_in(x: T, alloc: A) -> Self;
+alloc/src/boxed.rs:405:5                                    alloc::boxed::Box<T, A>                                     fn new_uninit_in(alloc: A) -> Box<mem::MaybeUninit<T>, A>;
+alloc/src/boxed.rs:469:5                                    alloc::boxed::Box<T, A>                                     fn new_zeroed_in(alloc: A) -> Box<mem::MaybeUninit<T>, A>;
+alloc/src/boxed.rs:514:5                                    alloc::boxed::Box<T, A>                                     fn pin_in(x: T, alloc: A) -> Pin<Self>;
+alloc/src/boxed.rs:564:5                                    alloc::boxed::Box<[T]>                                      fn new_uninit_slice(len: usize) -> Box<[mem::MaybeUninit<T>]>;
+alloc/src/boxed.rs:588:5                                    alloc::boxed::Box<[T]>                                      fn new_zeroed_slice(len: usize) -> Box<[mem::MaybeUninit<T>]>;
+alloc/src/boxed.rs:694:5                                    alloc::boxed::Box<[T], A>                                   fn new_uninit_in(alloc: A) -> Box<mem::MaybeUninit<T>, A>;
+alloc/src/boxed.rs:723:5                                    alloc::boxed::Box<[T], A>                                   fn new_zeroed_in(alloc: A) -> Box<mem::MaybeUninit<T>, A>;
 alloc/src/collections/binary_heap.rs:367:5                  alloc::collections::binary_heap::BinaryHeap<T>              fn new() -> BinaryHeap<T>;
 alloc/src/collections/binary_heap.rs:386:5                  alloc::collections::binary_heap::BinaryHeap<T>              fn with_capacity(capacity: usize) -> BinaryHeap<T>;
 alloc/src/collections/btree/map.rs:505:5                    alloc::collections::btree_map::BTreeMap<K, V>               const fn new() -> BTreeMap<K, V>;
@@ -258,6 +266,7 @@ alloc/src/raw_vec.rs:91:5                                   alloc::raw_vec::RawV
 alloc/src/raw_vec.rs:98:5                                   alloc::raw_vec::RawVec<T, Global>                           fn with_capacity_zeroed(capacity: usize) -> Self;
 alloc/src/rc.rs:455:5                                       alloc::rc::Rc<T>                                            fn new_uninit() -> Rc<mem::MaybeUninit<T>>;
 alloc/src/rc.rs:487:5                                       alloc::rc::Rc<T>                                            fn new_zeroed() -> Rc<mem::MaybeUninit<T>>;
+alloc/src/rc.rs:592:5                                       alloc::rc::Rc<T>                                            fn pin(value: T) -> Pin<Rc<T>>;
 alloc/src/rc.rs:661:5                                       alloc::rc::Rc<T>                                            fn new_uninit_slice(len: usize) -> Rc<[mem::MaybeUninit<T>]>;
 alloc/src/rc.rs:687:5                                       alloc::rc::Rc<T>                                            fn new_zeroed_slice(len: usize) -> Rc<[mem::MaybeUninit<T>]>;
 alloc/src/rc.rs:2047:5                                      alloc::rc::Weak<T>                                          fn new() -> Weak<T>;
@@ -265,11 +274,17 @@ alloc/src/string.rs:381:5                                   alloc::string::Strin
 alloc/src/string.rs:425:5                                   alloc::string::String                                       fn with_capacity(capacity: usize) -> String;
 alloc/src/sync.rs:451:5                                     alloc::sync::Arc<T>                                         fn new_uninit() -> Arc<mem::MaybeUninit<T>>;
 alloc/src/sync.rs:483:5                                     alloc::sync::Arc<T>                                         fn new_zeroed() -> Arc<mem::MaybeUninit<T>>;
+alloc/src/sync.rs:499:5                                     alloc::sync::Arc<T>                                         fn pin(data: T) -> Pin<Arc<T>>;
 alloc/src/sync.rs:665:5                                     alloc::sync::Arc<[T]>                                       fn new_uninit_slice(len: usize) -> Arc<[mem::MaybeUninit<T>]>;
 alloc/src/sync.rs:691:5                                     alloc::sync::Arc<[T]>                                       fn new_zeroed_slice(len: usize) -> Arc<[mem::MaybeUninit<T>]>;
 alloc/src/sync.rs:1681:5                                    alloc::sync::Weak<T>                                        fn new() -> Weak<T>;
 alloc/src/vec/mod.rs:423:5                                  alloc::vec::Vec<T>                                          const fn new() -> Self;
 alloc/src/vec/mod.rs:467:5                                  alloc::vec::Vec<T>                                          fn with_capacity(capacity: usize) -> Self;
+```
+
+# Add #[must_use] to constructors #TBD
+
+```rust
 core/src/alloc/layout.rs:123:5                              core::alloc::Layout                                         const fn new<T>() -> Self;
 core/src/hash/sip.rs:160:5                                  core::hash::SipHasher                                       fn new() -> SipHasher;
 core/src/hash/sip.rs:171:5                                  core::hash::SipHasher                                       fn new_with_keys(key0: u64, key1: u64) -> SipHasher;
