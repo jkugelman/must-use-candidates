@@ -102,10 +102,7 @@ std/src/ffi/c_str.rs:1096:5                                 std::ffi::IntoString
 std/src/ffi/os_str.rs:350:5                                 std::ffi::OsString                                          fn into_boxed_os_str(self) -> Box<OsStr>;
 std/src/io/buffered/bufwriter.rs:480:5                      std::io::BufWriter<W>                                       fn into_inner(self) -> Vec<u8>;
 std/src/io/error.rs:661:5                                   std::io::Error                                              fn into_inner(self) -> Option<Box<dyn error::Error + Send + Sync>>;
-std/src/io/stdio.rs:446:5                                   std::io::Stdin                                              fn into_locked(self) -> StdinLock<'static>;
 std/src/io/stdio.rs:467:5                                   std::io::Stdin                                              fn lines(self) -> Lines<StdinLock<'static>>;
-std/src/io/stdio.rs:792:5                                   std::io::Stdout                                             fn into_locked(self) -> StdoutLock<'static>;
-std/src/io/stdio.rs:1052:5                                  std::io::Stderr                                             fn into_locked(self) -> StderrLock<'static>;
 std/src/net/tcp.rs:887:5                                    std::net::TcpListener                                       fn into_incoming(self) -> IntoIncoming;
 std/src/path.rs:536:5                                       std::path::Component<'a>                                    fn as_os_str(self) -> &'a OsStr;
 std/src/path.rs:1432:5                                      std::path::PathBuf                                          fn into_os_string(self) -> OsString;
