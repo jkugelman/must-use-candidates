@@ -195,10 +195,9 @@ core/src/option.rs:1496:5                                   core::option::Option
 core/src/pin.rs:710:5                                       core::pin::Pin<&'a T>                                       const fn get_ref(self) -> &'a T;
 ```
 
-# Expensive constructors
+# Constructors
 
 ```rust
-
 std/src/backtrace.rs:291:5                                  std::backtrace::Backtrace                                   fn capture() -> Backtrace;
 std/src/backtrace.rs:309:5                                  std::backtrace::Backtrace                                   fn force_capture() -> Backtrace;
 std/src/backtrace.rs:315:5                                  std::backtrace::Backtrace                                   const fn disabled() -> Backtrace;
@@ -208,60 +207,6 @@ std/src/env.rs:568:1                                        std::env            
 std/src/env.rs:607:1                                        std::env                                                    fn temp_dir() -> PathBuf;
 std/src/env.rs:747:1                                        std::env                                                    fn args() -> Args;
 std/src/env.rs:782:1                                        std::env                                                    fn args_os() -> ArgsOs;
-```
-
-# Cheap constructors
-
-```rust
-alloc/src/str.rs:593:1                                      alloc::str                                                  unsafe fn from_boxed_utf8_unchecked(v: Box<[u8]>) -> Box<str>;
-alloc/src/string.rs:765:5                                   alloc::string::String                                       unsafe fn from_utf8_unchecked(bytes: Vec<u8>) -> String;
-core/src/alloc/layout.rs:98:5                               core::alloc::Layout                                         const unsafe fn from_size_align_unchecked(size: usize, align: usize) -> Self;
-core/src/char/convert.rs:53:1                               core::char                                                  fn from_u32(i: u32) -> Option<char>;
-core/src/char/convert.rs:92:1                               core::char                                                  unsafe fn from_u32_unchecked(i: u32) -> char;
-core/src/char/convert.rs:323:1                              core::char                                                  fn from_digit(num: u32, radix: u32) -> Option<char>;
-core/src/char/methods.rs:140:5                              char                                                        fn from_u32(i: u32) -> Option<char>;
-core/src/char/methods.rs:181:5                              char                                                        unsafe fn from_u32_unchecked(i: u32) -> char;
-core/src/char/methods.rs:237:5                              char                                                        fn from_digit(num: u32, radix: u32) -> Option<char>;
-core/src/num/f32.rs:790:5                                   core::num::f32                                              const fn from_bits(v: u32) -> Self;
-core/src/num/f32.rs:868:5                                   core::num::f32                                              const fn from_be_bytes(bytes: [u8; 4]) -> Self;
-core/src/num/f32.rs:883:5                                   core::num::f32                                              const fn from_le_bytes(bytes: [u8; 4]) -> Self;
-core/src/num/f32.rs:909:5                                   core::num::f32                                              const fn from_ne_bytes(bytes: [u8; 4]) -> Self;
-core/src/num/f64.rs:804:5                                   core::num::f64                                              const fn from_bits(v: u64) -> Self;
-core/src/num/f64.rs:882:5                                   core::num::f64                                              const fn from_be_bytes(bytes: [u8; 8]) -> Self;
-core/src/num/f64.rs:897:5                                   core::num::f64                                              const fn from_le_bytes(bytes: [u8; 8]) -> Self;
-core/src/num/f64.rs:923:5                                   core::num::f64                                              const fn from_ne_bytes(bytes: [u8; 8]) -> Self;
-core/src/num/int_macros.rs:286:9                            $Int                                                        const fn from_be(x: Self) -> Self;
-core/src/num/int_macros.rs:286:9                            $Int                                                        const fn from_be(x: Self) -> Self;
-core/src/num/int_macros.rs:317:9                            $Int                                                        const fn from_le(x: Self) -> Self;
-core/src/num/int_macros.rs:317:9                            $Int                                                        const fn from_le(x: Self) -> Self;
-core/src/num/int_macros.rs:2434:9                           $Int                                                        const fn from_be_bytes(bytes: [u8; mem::size_of::<Self>()]) -> Self;
-core/src/num/int_macros.rs:2464:9                           $Int                                                        const fn from_le_bytes(bytes: [u8; mem::size_of::<Self>()]) -> Self;
-core/src/num/int_macros.rs:2507:9                           $Int                                                        const fn from_ne_bytes(bytes: [u8; mem::size_of::<Self>()]) -> Self;
-core/src/num/saturating.rs:648:13                           core::num::Saturating<$Int>                                 const fn from_be(x: Self) -> Self;
-core/src/num/saturating.rs:675:13                           core::num::Saturating<$Int>                                 const fn from_le(x: Self) -> Self;
-core/src/num/uint_macros.rs:289:9                           $Int                                                        const fn from_be(x: Self) -> Self;
-core/src/num/uint_macros.rs:321:9                           $Int                                                        const fn from_le(x: Self) -> Self;
-core/src/num/uint_macros.rs:2182:9                          $Int                                                        const fn from_be_bytes(bytes: [u8; mem::size_of::<Self>()]) -> Self;
-core/src/num/uint_macros.rs:2212:9                          $Int                                                        const fn from_le_bytes(bytes: [u8; mem::size_of::<Self>()]) -> Self;
-core/src/num/uint_macros.rs:2255:9                          $Int                                                        const fn from_ne_bytes(bytes: [u8; mem::size_of::<Self>()]) -> Self;
-core/src/num/wrapping.rs:642:13                             core::num::Wrapping<$Int>                                   const fn from_be(x: Self) -> Self;
-core/src/num/wrapping.rs:669:13                             core::num::Wrapping<$Int>                                   const fn from_le(x: Self) -> Self;
-core/src/str/converts.rs:160:1                              core::str                                                   const unsafe fn from_utf8_unchecked(v: &[u8]) -> &str;
-core/src/str/lossy.rs:15:5                                  core::str::lossy::Utf8Lossy                                 fn from_str(s: &str) -> &Utf8Lossy;
-core/src/str/lossy.rs:19:5                                  core::str::lossy::Utf8Lossy                                 fn from_bytes(bytes: &[u8]) -> &Utf8Lossy;
-core/src/task/wake.rs:162:5                                 core::task::Context<'a>                                     fn from_waker(waker: &'a Waker) -> Self;
-core/src/task/wake.rs:255:5                                 core::task::Waker                                           unsafe fn from_raw(waker: RawWaker) -> Waker;
-core/src/time.rs:208:5                                      core::time::Duration                                        const fn from_secs(secs: u64) -> Duration;
-core/src/time.rs:227:5                                      core::time::Duration                                        const fn from_millis(millis: u64) -> Duration;
-core/src/time.rs:249:5                                      core::time::Duration                                        const fn from_micros(micros: u64) -> Duration;
-core/src/time.rs:271:5                                      core::time::Duration                                        const fn from_nanos(nanos: u64) -> Duration;
-core/src/time.rs:697:5                                      core::time::Duration                                        const fn from_secs_f64(secs: f64) -> Duration;
-core/src/time.rs:758:5                                      core::time::Duration                                        const fn from_secs_f32(secs: f32) -> Duration;
-std/src/ffi/c_str.rs:429:5                                  std::ffi::CString                                           unsafe fn from_vec_unchecked(mut v: Vec<u8>) -> CString;
-std/src/ffi/c_str.rs:705:5                                  std::ffi::CString                                           unsafe fn from_vec_with_nul_unchecked(v: Vec<u8>) -> Self;
-std/src/ffi/c_str.rs:1166:5                                 std::ffi::CStr                                              unsafe fn from_ptr<'a>(ptr: *const c_char) -> &'a CStr;
-std/src/ffi/c_str.rs:1249:5                                 std::ffi::CStr                                              const unsafe fn from_bytes_with_nul_unchecked(bytes: &[u8]) -> &CStr;
-std/src/io/error.rs:477:5                                   std::io::Error                                              fn from_raw_os_error(code: i32) -> Error;
 std/src/io/stdio.rs:304:1                                   std::io                                                     fn stdin() -> Stdin;
 std/src/io/stdio.rs:674:1                                   std::io                                                     fn stdout() -> Stdout;
 std/src/io/stdio.rs:953:1                                   std::io                                                     fn stderr() -> Stderr;
