@@ -282,7 +282,7 @@ alloc/src/vec/mod.rs:423:5                                  alloc::vec::Vec<T>  
 alloc/src/vec/mod.rs:467:5                                  alloc::vec::Vec<T>                                          fn with_capacity(capacity: usize) -> Self;
 ```
 
-# Add #[must_use] to constructors #TBD
+# Add #[must_use] to core and std constructors #89729
 
 ```rust
 core/src/alloc/layout.rs:123:5                              core::alloc::Layout                                         const fn new<T>() -> Self;
@@ -321,6 +321,5 @@ std/src/path.rs:1173:5                                      std::path::PathBuf  
 std/src/sync/barrier.rs:83:5                                std::sync::Barrier                                          fn new(n: usize) -> Barrier;
 std/src/sync/condvar.rs:124:5                               std::sync::Condvar                                          fn new() -> Condvar;
 std/src/sync/once.rs:189:5                                  std::sync::Once                                             const fn new() -> Once;
-std/src/thread/mod.rs:289:5                                 std::thread::Builder
-fn new() -> Builder;
 ```
+
