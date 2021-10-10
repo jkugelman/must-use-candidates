@@ -376,3 +376,52 @@ std/src/ffi/c_str.rs:1166:5                                 std::ffi::CStr      
 std/src/ffi/c_str.rs:1249:5                                 std::ffi::CStr                                              const unsafe fn from_bytes_with_nul_unchecked(bytes: &[u8]) -> &CStr;
 std/src/io/error.rs:477:5                                   std::io::Error                                              fn from_raw_os_error(code: i32) -> Error;
 ```
+
+# Add #[must_use] to conversions that move self #89755
+
+```rust
+alloc/src/collections/binary_heap.rs:852:5                  alloc::collections::binary_heap::BinaryHeap<T>              fn into_iter_sorted(self) -> IntoIterSorted<T>;
+alloc/src/collections/binary_heap.rs:1032:5                 alloc::collections::binary_heap::BinaryHeap<T>              fn into_vec(self) -> Vec<T>;
+alloc/src/collections/btree/map.rs:1268:5                   alloc::collections::btree_map::BTreeMap<K, V>               fn into_keys(self) -> IntoKeys<K, V>;
+alloc/src/collections/btree/map.rs:1290:5                   alloc::collections::btree_map::BTreeMap<K, V>               fn into_values(self) -> IntoValues<K, V>;
+alloc/src/collections/btree/map/entry.rs:452:5              alloc::collections::btree_map::OccupiedEntry<'a, K, V>      fn into_mut(self) -> &'a mut V;
+alloc/src/rc.rs:2134:5                                      alloc::rc::Weak<T>                                          fn into_raw(self) -> *const T;
+alloc/src/string.rs:680:5                                   alloc::string::String                                       fn into_raw_parts(self) -> (*mut u8, usize, usize);
+alloc/src/string.rs:785:5                                   alloc::string::String                                       fn into_bytes(self) -> Vec<u8>;
+alloc/src/string.rs:1742:5                                  alloc::string::String                                       fn into_boxed_str(self) -> Box<str>;
+alloc/src/string.rs:1787:5                                  alloc::string::FromUtf8Error                                fn into_bytes(self) -> Vec<u8>;
+alloc/src/sync.rs:739:5                                     alloc::sync::Arc<MaybeUninit<T>>                            unsafe fn assume_init(self) -> Arc<T>;
+alloc/src/sync.rs:780:5                                     alloc::sync::Arc<[MaybeUninit<T>]>                          unsafe fn assume_init(self) -> Arc<[T]>;
+alloc/src/sync.rs:1763:5                                    alloc::sync::Weak<T>                                        fn into_raw(self) -> *const T;
+core/src/option.rs:1477:5                                   core::option::Option<&mut T>                                fn copied(self) -> Option<T>;
+core/src/option.rs:1515:5                                   core::option::Option<&mut T>                                fn cloned(self) -> Option<T>;
+core/src/pin.rs:720:5                                       core::pin::Pin<&'a mut T>                                   const fn into_ref(self) -> Pin<&'a T>;
+core/src/pin.rs:736:5                                       core::pin::Pin<&'a mut T>                                   const fn get_mut(self) -> &'a mut T;
+core/src/pin.rs:756:5                                       core::pin::Pin<&'a mut T>                                   const unsafe fn get_unchecked_mut(self) -> &'a mut T;
+core/src/pin.rs:779:5                                       core::pin::Pin<&'a mut T>                                   unsafe fn map_unchecked_mut(self, func: F) -> Pin<&'a mut U>;
+core/src/pin.rs:815:5                                       core::pin::Pin<&'a mut Pin<P>>                              fn as_deref_mut(self) -> Pin<&'a mut P::Target>;
+core/src/ptr/unique.rs:105:5                                core::mem::Unique<T>                                        const fn as_ptr(self) -> *mut T;
+core/src/ptr/unique.rs:135:5                                core::mem::Unique<T>                                        const fn cast<U>(self) -> Unique<U>;
+core/src/slice/iter.rs:271:5                                core::slice::IterMut<'a, T>                                 fn into_slice(self) -> &'a mut [T];
+core/src/slice/iter.rs:1873:5                               core::slice::ChunksExactMut<'a, T>                          fn into_remainder(self) -> &'a mut [T];
+core/src/slice/iter.rs:2268:5                               core::slice::ArrayChunksMut<'a, T, N>                       fn into_remainder(self) -> &'a mut [T];
+core/src/slice/iter.rs:2879:5                               core::slice::RChunksExactMut<'a, T>                         fn into_remainder(self) -> &'a mut [T];
+std/src/collections/hash/map.rs:1724:5                      std::collections::hash_map::RawOccupiedEntryMut<'a, K, V>   fn into_key(self) -> &'a mut K;
+std/src/collections/hash/map.rs:1739:5                      std::collections::hash_map::RawOccupiedEntryMut<'a, K, V>   fn into_mut(self) -> &'a mut V;
+std/src/collections/hash/map.rs:1768:5                      std::collections::hash_map::RawOccupiedEntryMut<'a, K, V>   fn into_key_value(self) -> (&'a mut K, &'a mut V);
+std/src/ffi/c_str.rs:325:5                                  std::ffi:FromVecWithNulError                                fn into_bytes(self) -> Vec<u8>;
+std/src/ffi/c_str.rs:528:5                                  std::ffi::CString                                           fn into_raw(self) -> *mut c_char;
+std/src/ffi/c_str.rs:575:5                                  std::ffi::CString                                           fn into_bytes(self) -> Vec<u8>;
+std/src/ffi/c_str.rs:595:5                                  std::ffi::CString                                           fn into_bytes_with_nul(self) -> Vec<u8>;
+std/src/ffi/c_str.rs:671:5                                  std::ffi::CString                                           fn into_boxed_c_str(self) -> Box<CStr>;
+std/src/ffi/c_str.rs:1022:5                                 std::ffi::NulError                                          fn into_vec(self) -> Vec<u8>;
+std/src/ffi/c_str.rs:1096:5                                 std::ffi::IntoStringError                                   fn into_cstring(self) -> CString;
+std/src/ffi/os_str.rs:350:5                                 std::ffi::OsString                                          fn into_boxed_os_str(self) -> Box<OsStr>;
+std/src/io/buffered/bufwriter.rs:480:5                      std::io::BufWriter<W>                                       fn into_inner(self) -> Vec<u8>;
+std/src/io/error.rs:661:5                                   std::io::Error                                              fn into_inner(self) -> Option<Box<dyn error::Error + Send + Sync>>;
+std/src/io/stdio.rs:467:5                                   std::io::Stdin                                              fn lines(self) -> Lines<StdinLock<'static>>;
+std/src/net/tcp.rs:887:5                                    std::net::TcpListener                                       fn into_incoming(self) -> IntoIncoming;
+std/src/path.rs:536:5                                       std::path::Component<'a>                                    fn as_os_str(self) -> &'a OsStr;
+std/src/path.rs:1432:5                                      std::path::PathBuf                                          fn into_os_string(self) -> OsString;
+std/src/path.rs:1439:5                                      std::path::PathBuf                                          fn into_boxed_path(self) -> Box<Path>;
+```

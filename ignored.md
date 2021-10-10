@@ -1,6 +1,7 @@
 # Ignored
 
 ```
+core::mem::DynMetadata<Dyn>
 core::num::bignum
 core::num::dec2flt
 core::num::diy_float
