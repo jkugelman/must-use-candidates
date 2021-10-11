@@ -1,4 +1,4 @@
-# Add #[must_use] to stdin/stdout/stderr locks #89693
+#### Add #[must_use] to stdin/stdout/stderr locks #89693
 
 ```rust
 std/src/io/stdio.rs:351:1    std::io           fn stdin_locked() -> StdinLock<'static>;
@@ -12,7 +12,7 @@ std/src/io/stdio.rs:1018:5   std::io::Stderr   fn lock(&self) -> StderrLock<'_>;
 std/src/io/stdio.rs:1052:5   std::io::Stderr   fn into_locked(self) -> StderrLock<'static>;
 ```
 
-# Add #[must_use] to string transformation methods #89694
+#### Add #[must_use] to string transformation methods #89694
 
 ```rust
 alloc/src/slice.rs:667:5          [u8]              fn to_ascii_uppercase(&self) -> Vec<u8>;
@@ -41,7 +41,7 @@ std/src/ffi/os_str.rs:781:5       std::ffi::OsStr   fn to_ascii_lowercase(&self)
 std/src/ffi/os_str.rs:802:5       std::ffi::OsStr   fn to_ascii_uppercase(&self) -> OsString;
 ```
 
-# Add #[must_use] to is_condition checks #89718
+#### Add #[must_use] to is_condition checks #89718
 
 ```rust
 alloc/src/collections/btree/set.rs:538:5   alloc::collections::btree_set::BTreeSet<T>   fn is_disjoint(&self, other: &BTreeSet<T>) -> bool;
@@ -107,7 +107,7 @@ core/src/str/mod.rs:193:5                  str                                  
 core/src/time.rs:297:5                     core::time::Duration                         const fn is_zero(&self) -> bool;
 ```
 
-# Add #[must_use] to char escape methods #89719
+#### Add #[must_use] to char escape methods #89719
 
 ```rust
 core/src/char/methods.rs:382:5   char   fn escape_unicode(self) -> EscapeUnicode;
@@ -115,7 +115,7 @@ core/src/char/methods.rs:458:5   char   fn escape_debug(self) -> EscapeDebug;
 core/src/char/methods.rs:512:5   char   fn escape_default(self) -> EscapeDefault;
 ```
 
-# Add #[must_use] to math and bit manipulation methods #89720
+#### Add #[must_use] to math and bit manipulation methods #89720
 
 ```rust
 core/src/num/f32.rs:641:5            core::num::f32                fn to_degrees(self) -> f32;
@@ -238,7 +238,7 @@ core/src/time.rs:903:5               core::time::Duration          const fn div_
 core/src/time.rs:921:5               core::time::Duration          const fn div_duration_f32(self, rhs: Duration) -> f32;
 ```
 
-# Add #[must_use] to alloc constructors #89726
+#### Add #[must_use] to alloc constructors #89726
 
 ```rust
 alloc/src/boxed.rs:190:5                       alloc::boxed::Box<T>                             fn new() -> Self;
@@ -281,7 +281,7 @@ alloc/src/vec/mod.rs:423:5                     alloc::vec::Vec<T>               
 alloc/src/vec/mod.rs:467:5                     alloc::vec::Vec<T>                               fn with_capacity(capacity: usize) -> Self;
 ```
 
-# Add #[must_use] to core and std constructors #89729
+#### Add #[must_use] to core and std constructors #89729
 
 ```rust
 core/src/alloc/layout.rs:123:5           core::alloc::Layout                         const fn new<T>() -> Self;
@@ -322,13 +322,13 @@ std/src/sync/condvar.rs:124:5            std::sync::Condvar                     
 std/src/sync/once.rs:189:5               std::sync::Once                             const fn new() -> Once;
 ```
 
-# Add #[must_use] to MaybeUninit::new #89769
+#### Add #[must_use] to MaybeUninit::new #89769
 
 ```rust
 core/src/mem/maybe_uninit.rs:295   core::mem::MaybeUninit<T>   fn new(val: T) -> MaybeUninit<T>;
 ```
 
-# Add #[must_use] to from_value conversions #89753
+#### Add #[must_use] to from_value conversions #89753
 
 ```rust
 alloc/src/str.rs:593:1               alloc::str                    unsafe fn from_boxed_utf8_unchecked(v: Box<[u8]>) -> Box<str>;
@@ -382,7 +382,7 @@ std/src/ffi/c_str.rs:1249:5          std::ffi::CStr                const unsafe 
 std/src/io/error.rs:477:5            std::io::Error                fn from_raw_os_error(code: i32) -> Error;
 ```
 
-# Add #[must_use] to conversions that move self #89755
+#### Add #[must_use] to conversions that move self #89755
 
 ```rust
 alloc/src/collections/binary_heap.rs:852:5       alloc::collections::binary_heap::BinaryHeap<T>              fn into_iter_sorted(self) -> IntoIterSorted<T>;
@@ -431,14 +431,14 @@ std/src/path.rs:1432:5                           std::path::PathBuf             
 std/src/path.rs:1439:5                           std::path::PathBuf                                          fn into_boxed_path(self) -> Box<Path>;
 ```
 
-# Add #[must_use] to From::from and Into::into #89770
+#### Add #[must_use] to From::from and Into::into #89770
 
 ```rust
 core/src/convert/mod.rs:280   core::convert::Into<T>   fn into(self) -> T;
 core/src/convert/mod.rs:375   core::convert::From<T>   fn from(_: T) -> Self;
 ```
 
-# Add #[must_use] to as_type conversions #89778
+#### Add #[must_use] to as_type conversions #89778
 
 ```rust
 alloc/src/collections/binary_heap.rs:1010:5   alloc::collections::binary_heap::BinaryHeap<T>      fn as_slice(&self) -> &[T];
@@ -497,7 +497,7 @@ std/src/path.rs:1922:5                        std::path::Path                   
 std/src/thread/mod.rs:1035:5                  std::thread::ThreadId                               fn as_u64(&self) -> NonZeroU64;
 ```
 
-Add #[must_use] to len and is_empty #89786
+#### Add #[must_use] to len and is_empty #89786
 
 ```rust
 alloc/src/collections/binary_heap.rs:1049:5   alloc::collections::binary_heap::BinaryHeap<T>   fn len(&self) -> usize;
