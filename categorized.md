@@ -61,10 +61,7 @@ std/src/path.rs:2454:5                                      std::path::Path     
 
 ```rust
 core/src/ptr/non_null.rs:244:5                              core::mem::NonNull<T>                                       const fn to_raw_parts(self) -> (NonNull<()>, <T as super::Pointee>::Metadata);
-core/src/ptr/non_null.rs:268:5                              core::mem::NonNull<T>                                       const fn as_ptr(self) -> *mut T;
 core/src/ptr/non_null.rs:385:5                              core::mem::NonNull<T>                                       const fn cast<U>(self) -> NonNull<U>;
-core/src/ptr/non_null.rs:460:5                              core::mem::NonNull<[T]>                                     const fn as_non_null_ptr(self) -> NonNull<T>;
-core/src/ptr/non_null.rs:479:5                              core::mem::NonNull<[T]>                                     const fn as_mut_ptr(self) -> *mut T;
 
 core/src/char/methods.rs:332:5                              char                                                        fn to_digit(self, radix: u32) -> Option<u32>;
 std/src/ffi/c_str.rs:1330:5                                 std::ffi::CStr                                              fn to_bytes(&self) -> &[u8];
@@ -149,25 +146,6 @@ std/src/f64.rs:715:5                                        f64                 
 # Getters
 
 ```rust
-alloc/src/collections/binary_heap.rs:1049:5                 alloc::collections::binary_heap::BinaryHeap<T>              fn len(&self) -> usize;
-alloc/src/collections/binary_heap.rs:1072:5                 alloc::collections::binary_heap::BinaryHeap<T>              fn is_empty(&self) -> bool;
-alloc/src/collections/btree/map.rs:2207:5                   alloc::collections::btree_map::BTreeMap<K, V>               const fn len(&self) -> usize;
-alloc/src/collections/btree/map.rs:2227:5                   alloc::collections::btree_map::BTreeMap<K, V>               const fn is_empty(&self) -> bool;
-alloc/src/collections/btree/set.rs:1035:5                   alloc::collections::btree_set::BTreeSet<T>                  const fn len(&self) -> usize;
-alloc/src/collections/btree/set.rs:1053:5                   alloc::collections::btree_set::BTreeSet<T>                  const fn is_empty(&self) -> bool;
-alloc/src/collections/linked_list.rs:580:5                  alloc::collections::linked_list::LinkedList<T>              fn is_empty(&self) -> bool;
-alloc/src/collections/linked_list.rs:606:5                  alloc::collections::linked_list::LinkedList<T>              fn len(&self) -> usize;
-alloc/src/string.rs:1539:5                                  alloc::string::String                                       fn len(&self) -> usize;
-alloc/src/string.rs:1558:5                                  alloc::string::String                                       fn is_empty(&self) -> bool;
-core/src/ptr/non_null.rs:442:5                              core::mem::NonNull<[T]>                                     const fn len(self) -> usize;
-core/src/str/mod.rs:144:5                                   str                                                         const fn len(&self) -> usize;
-core/src/str/mod.rs:164:5                                   str                                                         const fn is_empty(&self) -> bool;
-std/src/ffi/os_str.rs:663:5                                 std::ffi::OsStr                                             fn is_empty(&self) -> bool;
-std/src/ffi/os_str.rs:694:5                                 std::ffi::OsStr                                             fn len(&self) -> usize;
-std/src/fs.rs:1059:5                                        std::fs::MetaData                                           fn len(&self) -> u64;
-std/src/os/unix/net/ancillary.rs:434:5                      std::os::unix::net::SocketAncillary<'a>                     fn is_empty(&self) -> bool;
-std/src/os/unix/net/ancillary.rs:440:5                      std::os::unix::net::SocketAncillary<'a>                     fn len(&self) -> usize;
-
 std/src/fs.rs:986:5                                         std::fs::MetaData                                           fn is_dir(&self) -> bool;
 std/src/fs.rs:1014:5                                        std::fs::MetaData                                           fn is_file(&self) -> bool;
 std/src/fs.rs:1040:5                                        std::fs::MetaData                                           fn is_symlink(&self) -> bool;
