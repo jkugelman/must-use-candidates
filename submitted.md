@@ -12,7 +12,6 @@ std/src/io/stdio.rs:1018:5   std::io::Stderr   fn lock(&self) -> StderrLock<'_>;
 std/src/io/stdio.rs:1052:5   std::io::Stderr   fn into_locked(self) -> StderrLock<'static>;
 ```
 
-
 # Add #[must_use] to string transformation methods #89694
 
 ```rust
@@ -498,7 +497,7 @@ std/src/path.rs:1922:5                        std::path::Path                   
 std/src/thread/mod.rs:1035:5                  std::thread::ThreadId                               fn as_u64(&self) -> NonZeroU64;
 ```
 
-Add #[must_use] to len and is_empty
+Add #[must_use] to len and is_empty #89786
 
 ```rust
 alloc/src/collections/binary_heap.rs:1049:5   alloc::collections::binary_heap::BinaryHeap<T>   fn len(&self) -> usize;
