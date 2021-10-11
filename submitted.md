@@ -519,3 +519,11 @@ std/src/fs.rs:1059:5                          std::fs::MetaData                 
 std/src/os/unix/net/ancillary.rs:434:5        std::os::unix::net::SocketAncillary<'a>          fn is_empty(&self) -> bool;
 std/src/os/unix/net/ancillary.rs:440:5        std::os::unix::net::SocketAncillary<'a>          fn len(&self) -> usize;
 ```
+
+#### Add #[must_use] to thread::Builder #89789
+
+```rust
+std/src/thread/mod.rs:289:5   std::thread::Builder   fn new() -> Builder;
+std/src/thread/mod.rs:318:5   std::thread::Builder   fn name(mut self, name: String) -> Builder;
+std/src/thread/mod.rs:341:5   std::thread::Builder   fn stack_size(mut self, size: usize) -> Builder;
+```

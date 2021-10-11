@@ -19,14 +19,6 @@ std/src/path.rs:2510:5                                      std::path::Path     
 std/src/io/stdio.rs:489:5                                   std::io::Stdin                                              fn split(self, byte: u8) -> Split<StdinLock<'static>>;
 ```
 
-# Discarded builder
-
-```rust
-std/src/thread/mod.rs:289:5                                 std::thread::Builder                                        fn new() -> Builder;
-std/src/thread/mod.rs:318:5                                 std::thread::Builder                                        fn name(mut self, name: String) -> Builder;
-std/src/thread/mod.rs:341:5                                 std::thread::Builder                                        fn stack_size(mut self, size: usize) -> Builder;
-```
-
 # Expensive computations
 
 ```rust
