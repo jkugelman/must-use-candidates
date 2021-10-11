@@ -323,6 +323,12 @@ std/src/sync/condvar.rs:124:5                               std::sync::Condvar  
 std/src/sync/once.rs:189:5                                  std::sync::Once                                             const fn new() -> Once;
 ```
 
+# Add #[must_use] to MaybeUninit::new #89769
+
+```rust
+core/src/mem/maybe_uninit.rs:295                            core::mem::MaybeUninit<T>                                   fn new(val: T) -> MaybeUninit<T>;
+```
+
 # Add #[must_use] to from_value conversions #89753
 
 ```rust
@@ -424,4 +430,11 @@ std/src/net/tcp.rs:887:5                                    std::net::TcpListene
 std/src/path.rs:536:5                                       std::path::Component<'a>                                    fn as_os_str(self) -> &'a OsStr;
 std/src/path.rs:1432:5                                      std::path::PathBuf                                          fn into_os_string(self) -> OsString;
 std/src/path.rs:1439:5                                      std::path::PathBuf                                          fn into_boxed_path(self) -> Box<Path>;
+```
+
+# Add #[must_use] to From::from and Into::into #89770
+
+```rust
+core/src/convert/mod.rs:280                                 core::convert::Into<T>                                      fn into(self) -> T;
+core/src/convert/mod.rs:375                                 core::convert::From<T>                                      fn from(_: T) -> Self;
 ```
