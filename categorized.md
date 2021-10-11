@@ -1,18 +1,3 @@
-# Misleading
-
-```rust
-std/src/net/ip.rs:423:5                                     std::net::IpAddr                                            const fn to_canonical(&self) -> IpAddr;
-std/src/net/ip.rs:1683:5                                    std::net::Ipv6Addr                                          const fn to_canonical(&self) -> IpAddr;
-
-alloc/src/rc.rs:2226:5                                      alloc::rc::Weak<T>                                          fn upgrade(&self) -> Option<Rc<T>>;
-alloc/src/sync.rs:894:5                                     alloc::sync::Arc<T>                                         fn downgrade(this: &Self) -> Weak<T>;
-alloc/src/sync.rs:1856:5                                    alloc::sync::Weak<T>                                        fn upgrade(&self) -> Option<Arc<T>>;
-core/src/alloc/layout.rs:115:5                              core::alloc::Layout                                         const fn align(&self) -> usize;
-core/src/alloc/layout.rs:264:5                              core::alloc::Layout                                         fn pad_to_align(&self) -> Layout;
-std/src/path.rs:2510:5                                      std::path::Path                                             fn display(&self) -> Display<'_>;
-
-```
-
 # Discarded guard
 
 ```rust
@@ -52,24 +37,6 @@ std/src/path.rs:2454:5                                      std::path::Path     
 # Conversions
 
 ```rust
-core/src/ptr/non_null.rs:244:5                              core::mem::NonNull<T>                                       const fn to_raw_parts(self) -> (NonNull<()>, <T as super::Pointee>::Metadata);
-core/src/ptr/non_null.rs:385:5                              core::mem::NonNull<T>                                       const fn cast<U>(self) -> NonNull<U>;
-
-core/src/char/methods.rs:332:5                              char                                                        fn to_digit(self, radix: u32) -> Option<u32>;
-std/src/ffi/c_str.rs:1330:5                                 std::ffi::CStr                                              fn to_bytes(&self) -> &[u8];
-std/src/ffi/c_str.rs:1355:5                                 std::ffi::CStr                                              fn to_bytes_with_nul(&self) -> &[u8];
-std/src/ffi/c_str.rs:1425:5                                 std::ffi::CStr                                              fn to_string_lossy(&self) -> Cow<'_, str>;
-std/src/ffi/os_str.rs:576:5                                 std::ffi::OsStr                                             fn to_str(&self) -> Option<&str>;
-std/src/ffi/os_str.rs:627:5                                 std::ffi::OsStr                                             fn to_string_lossy(&self) -> Cow<'_, str>;
-std/src/ffi/os_str.rs:644:5                                 std::ffi::OsStr                                             fn to_os_string(&self) -> OsString;
-std/src/net/ip.rs:885:5                                     std::net::Ipv4Addr                                          const fn to_ipv6_compatible(&self) -> Ipv6Addr;
-std/src/net/ip.rs:910:5                                     std::net::Ipv4Addr                                          const fn to_ipv6_mapped(&self) -> Ipv6Addr;
-std/src/net/ip.rs:1621:5                                    std::net::Ipv6Addr                                          const fn to_ipv4_mapped(&self) -> Option<Ipv4Addr>;
-std/src/net/ip.rs:1658:5                                    std::net::Ipv6Addr                                          const fn to_ipv4(&self) -> Option<Ipv4Addr>;
-std/src/path.rs:1944:5                                      std::path::Path                                             fn to_str(&self) -> Option<&str>;
-std/src/path.rs:1970:5                                      std::path::Path                                             fn to_string_lossy(&self) -> Cow<'_, str>;
-std/src/path.rs:1986:5                                      std::path::Path                                             fn to_path_buf(&self) -> PathBuf;
-
 alloc/src/collections/binary_heap.rs:514:5                  alloc::collections::binary_heap::BinaryHeap<T>              fn into_sorted_vec(mut self) -> Vec<T>;
 alloc/src/str.rs:247:5                                      str                                                         fn into_boxed_bytes(self: Box<str>) -> Box<[u8]>;
 alloc/src/str.rs:484:5                                      str                                                         fn into_string(self: Box<str>) -> String;
