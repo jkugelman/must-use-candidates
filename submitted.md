@@ -438,3 +438,62 @@ std/src/path.rs:1439:5                                      std::path::PathBuf  
 core/src/convert/mod.rs:280                                 core::convert::Into<T>                                      fn into(self) -> T;
 core/src/convert/mod.rs:375                                 core::convert::From<T>                                      fn from(_: T) -> Self;
 ```
+
+# Add #[must_use] to as_type conversions #89778
+
+```rust
+alloc/src/collections/binary_heap.rs:1010:5                 alloc::collections::binary_heap::BinaryHeap<T>              fn as_slice(&self) -> &[T];
+alloc/src/collections/linked_list.rs:1388:5                 alloc::collections::linked_list::CursorMut<'a, T>           fn as_cursor(&self) -> Cursor<'_, T>;
+alloc/src/rc.rs:2091:5                                      alloc::rc::Weak<T>                                          fn as_ptr(&self) -> *const T;
+alloc/src/string.rs:802:5                                   alloc::string::String                                       fn as_str(&self) -> &str;
+alloc/src/string.rs:825:5                                   alloc::string::String                                       fn as_mut_str(&mut self) -> &mut str;
+alloc/src/string.rs:1162:5                                  alloc::string::String                                       fn as_bytes(&self) -> &[u8];
+alloc/src/string.rs:1764:5                                  alloc::string::FromUtf8Error                                fn as_bytes(&self) -> &[u8];
+alloc/src/string.rs:2779:5                                  alloc::string::Drain<'a>                                    fn as_str(&self) -> &str;
+alloc/src/sync.rs:824:5                                     alloc::sync::Arc<T>                                         fn as_ptr(this: &Self) -> *const T;
+alloc/src/sync.rs:1720:5                                    alloc::sync::Weak<T>                                        fn as_ptr(&self) -> *const T;
+alloc/src/vec/drain.rs:56:5                                 alloc::vec::Drain<'a, T, A>                                 fn as_slice(&self) -> &[T];
+core/src/fmt/mod.rs:495:5                                   core::fmt::Arguments<'a>                                    const fn as_str(&self) -> Option<&'static str>;
+core/src/option.rs:661:5                                    core::option::Option<T>                                     fn as_pin_ref(self: Pin<&Self>) -> Option<Pin<&T>>;
+core/src/option.rs:672:5                                    core::option::Option<T>                                     fn as_pin_mut(self: Pin<&mut Self>) -> Option<Pin<&mut T>>;
+core/src/ptr/non_null.rs:123:5                              core::mem::NonNull<T>                                       unsafe fn as_uninit_ref<'a>(&self) -> &'a MaybeUninit<T>;
+core/src/ptr/non_null.rs:156:5                              core::mem::NonNull<T>                                       unsafe fn as_uninit_mut<'a>(&mut self) -> &'a MaybeUninit<T>;
+core/src/ptr/non_null.rs:268:5                              core::mem::NonNull<T>                                       const fn as_ptr(self) -> *mut T;
+core/src/ptr/non_null.rs:314:5                              core::mem::NonNull<T>                                       unsafe fn as_ref<'a>(&self) -> &'a T;
+core/src/ptr/non_null.rs:368:5                              core::mem::NonNull<T>                                       unsafe fn as_mut<'a>(&mut self) -> &'a mut T;
+core/src/ptr/non_null.rs:460:5                              core::mem::NonNull<[T]>                                     const fn as_non_null_ptr(self) -> NonNull<T>;
+core/src/ptr/non_null.rs:479:5                              core::mem::NonNull<[T]>                                     const fn as_mut_ptr(self) -> *mut T;
+core/src/ptr/non_null.rs:522:5                              core::mem::NonNull<[T]>                                     unsafe fn as_uninit_slice<'a>(&self) -> &'a [MaybeUninit<T>];
+core/src/ptr/non_null.rs:583:5                              core::mem::NonNull<[T]>                                     unsafe fn as_uninit_slice_mut<'a>(&self) -> &'a mut [MaybeUninit<T>];
+core/src/ptr/unique.rs:115:5                                core::mem::Unique<T>                                        unsafe fn as_ref(&self) -> &T;
+core/src/ptr/unique.rs:130:5                                core::mem::Unique<T>                                        unsafe fn as_mut(&mut self) -> &mut T;
+core/src/slice/iter.rs:128:5                                core::slice::Iter<'a, T>                                    fn as_slice(&self) -> &'a [T];
+core/src/slice/iter.rs:301:5                                core::slice::IterMut<'a, T>                                 fn as_slice(&self) -> &[T];
+core/src/str/iter.rs:113:5                                  core::str::Chars<'a>                                        fn as_str(&self) -> &'a str;
+core/src/str/iter.rs:189:5                                  core::str::CharIndices<'a>                                  fn as_str(&self) -> &'a str;
+core/src/str/iter.rs:1251:5                                 core::str::SplitWhitespace<'a>                              fn as_str(&self) -> &'a str;
+core/src/str/iter.rs:1306:5                                 core::str::SplitAsciiWhitespace<'a>                         fn as_str(&self) -> &'a str;
+core/src/str/mod.rs:234:5                                   str                                                         const fn as_bytes(&self) -> &[u8];
+core/src/str/mod.rs:280:5                                   str                                                         unsafe fn as_bytes_mut(&mut self) -> &mut [u8];
+core/src/str/mod.rs:307:5                                   str                                                         const fn as_ptr(&self) -> *const u8;
+core/src/str/mod.rs:326:5                                   str                                                         fn as_mut_ptr(&mut self) -> *mut u8;
+core/src/time.rs:332:5                                      core::time::Duration                                        const fn as_secs(&self) -> u64;
+core/src/time.rs:415:5                                      core::time::Duration                                        const fn as_millis(&self) -> u128;
+core/src/time.rs:432:5                                      core::time::Duration                                        const fn as_micros(&self) -> u128;
+core/src/time.rs:449:5                                      core::time::Duration                                        const fn as_nanos(&self) -> u128;
+core/src/time.rs:659:5                                      core::time::Duration                                        const fn as_secs_f64(&self) -> f64;
+core/src/time.rs:677:5                                      core::time::Duration                                        const fn as_secs_f32(&self) -> f32;
+std/src/ffi/c_str.rs:300:5                                  std::ffi:FromVecWithNulError                                fn as_bytes(&self) -> &[u8];
+std/src/ffi/c_str.rs:617:5                                  std::ffi::CString                                           fn as_bytes(&self) -> &[u8];
+std/src/ffi/c_str.rs:636:5                                  std::ffi::CString                                           fn as_bytes_with_nul(&self) -> &[u8];
+std/src/ffi/c_str.rs:654:5                                  std::ffi::CString                                           fn as_c_str(&self) -> &CStr;
+std/src/ffi/c_str.rs:1307:5                                 std::ffi::CStr                                              const fn as_ptr(&self) -> *const c_char;
+std/src/ffi/os_str.rs:140:5                                 std::ffi::OsString                                          fn as_os_str(&self) -> &OsStr;
+std/src/os/unix/net/addr.rs:195:5                           std::os::unix::net::SocketAddr                              fn as_pathname(&self) -> Option<&Path>;
+std/src/path.rs:431:5                                       std::path::PrefixComponent<'a>                              fn as_os_str(&self) -> &'a OsStr;
+std/src/path.rs:679:5                                       std::path::Components<'a>                                   fn as_path(&self) -> &'a Path;
+std/src/path.rs:824:5                                       std::path::Iter<'a>                                         fn as_path(&self) -> &'a Path;
+std/src/path.rs:1189:5                                      std::path::PathBuf                                          fn as_path(&self) -> &Path;
+std/src/path.rs:1922:5                                      std::path::Path                                             fn as_os_str(&self) -> &OsStr;
+std/src/thread/mod.rs:1035:5                                std::thread::ThreadId                                       fn as_u64(&self) -> NonZeroU64;
+```
