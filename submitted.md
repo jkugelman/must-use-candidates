@@ -551,7 +551,7 @@ std/src/path.rs:1970:5           std::path::Path         fn to_string_lossy(&sel
 std/src/path.rs:1986:5           std::path::Path         fn to_path_buf(&self) -> PathBuf;
 ```
 
-#### Add #[must_use] to non-mutating verb methods
+#### Add #[must_use] to non-mutating verb methods #89796
 
 ```rust
 alloc/src/rc.rs:2226:5           alloc::rc::Weak<T>     fn upgrade(&self) -> Option<Rc<T>>;
