@@ -614,3 +614,9 @@ std/src/path.rs:2722:5              std::path::Path                  fn is_dir(&
 std/src/path.rs:2748:5              std::path::Path                  fn is_symlink(&self) -> bool;
 std/src/sync/barrier.rs:169:5       std::sync::BarrierWaitResult     fn is_leader(&self) -> bool;
 ```
+
+#### Add #[must_use] to Rc::downgrade #89833
+
+```rust
+alloc/src/sync.rs:895:5   alloc::sync::Rc<T>   fn downgrade(this: &Self) -> Weak<T>;
+```
