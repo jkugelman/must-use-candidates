@@ -562,3 +562,55 @@ core/src/alloc/layout.rs:231:5   core::alloc::Layout    const fn padding_needed_
 core/src/alloc/layout.rs:264:5   core::alloc::Layout    fn pad_to_align(&self) -> Layout;
 std/src/path.rs:2510:5           std::path::Path        fn display(&self) -> Display<'_>;
 ```
+
+#### Add #[must_use] to is_condition tests #89797
+
+```rust
+std/src/fs.rs:986:5                 std::fs::MetaData                fn is_dir(&self) -> bool;
+std/src/fs.rs:1014:5                std::fs::MetaData                fn is_file(&self) -> bool;
+std/src/fs.rs:1040:5                std::fs::MetaData                fn is_symlink(&self) -> bool;
+std/src/fs.rs:1287:5                std::fs::FileType                fn is_dir(&self) -> bool;
+std/src/fs.rs:1319:5                std::fs::FileType                fn is_file(&self) -> bool;
+std/src/fs.rs:1354:5                std::fs::FileType                fn is_symlink(&self) -> bool;
+std/src/net/addr.rs:236:5           std::net::SocketAddr             const fn is_ipv4(&self) -> bool;
+std/src/net/addr.rs:257:5           std::net::SocketAddr             const fn is_ipv6(&self) -> bool;
+std/src/net/ip.rs:237:5             std::net::IpAddr                 const fn is_unspecified(&self) -> bool;
+std/src/net/ip.rs:260:5             std::net::IpAddr                 const fn is_loopback(&self) -> bool;
+std/src/net/ip.rs:285:5             std::net::IpAddr                 const fn is_global(&self) -> bool;
+std/src/net/ip.rs:308:5             std::net::IpAddr                 const fn is_multicast(&self) -> bool;
+std/src/net/ip.rs:336:5             std::net::IpAddr                 const fn is_documentation(&self) -> bool;
+std/src/net/ip.rs:360:5             std::net::IpAddr                 const fn is_benchmarking(&self) -> bool;
+std/src/net/ip.rs:383:5             std::net::IpAddr                 const fn is_ipv4(&self) -> bool;
+std/src/net/ip.rs:403:5             std::net::IpAddr                 const fn is_ipv6(&self) -> bool;
+std/src/net/ip.rs:530:5             std::net::Ipv4Addr               const fn is_unspecified(&self) -> bool;
+std/src/net/ip.rs:551:5             std::net::Ipv4Addr               const fn is_loopback(&self) -> bool;
+std/src/net/ip.rs:581:5             std::net::Ipv4Addr               const fn is_private(&self) -> bool;
+std/src/net/ip.rs:608:5             std::net::Ipv4Addr               const fn is_link_local(&self) -> bool;
+std/src/net/ip.rs:683:5             std::net::Ipv4Addr               const fn is_global(&self) -> bool;
+std/src/net/ip.rs:723:5             std::net::Ipv4Addr               const fn is_shared(&self) -> bool;
+std/src/net/ip.rs:748:5             std::net::Ipv4Addr               const fn is_benchmarking(&self) -> bool;
+std/src/net/ip.rs:782:5             std::net::Ipv4Addr               const fn is_reserved(&self) -> bool;
+std/src/net/ip.rs:805:5             std::net::Ipv4Addr               const fn is_multicast(&self) -> bool;
+std/src/net/ip.rs:826:5             std::net::Ipv4Addr               const fn is_broadcast(&self) -> bool;
+std/src/net/ip.rs:853:5             std::net::Ipv4Addr               const fn is_documentation(&self) -> bool;
+std/src/net/ip.rs:1293:5            std::net::Ipv6Addr               const fn is_unspecified(&self) -> bool;
+std/src/net/ip.rs:1316:5            std::net::Ipv6Addr               const fn is_loopback(&self) -> bool;
+std/src/net/ip.rs:1342:5            std::net::Ipv6Addr               const fn is_global(&self) -> bool;
+std/src/net/ip.rs:1369:5            std::net::Ipv6Addr               const fn is_unique_local(&self) -> bool;
+std/src/net/ip.rs:1397:5            std::net::Ipv6Addr               const fn is_unicast(&self) -> bool;
+std/src/net/ip.rs:1448:5            std::net::Ipv6Addr               const fn is_unicast_link_local(&self) -> bool;
+std/src/net/ip.rs:1472:5            std::net::Ipv6Addr               const fn is_documentation(&self) -> bool;
+std/src/net/ip.rs:1494:5            std::net::Ipv6Addr               const fn is_benchmarking(&self) -> bool;
+std/src/net/ip.rs:1531:5            std::net::Ipv6Addr               const fn is_unicast_global(&self) -> bool;
+std/src/net/ip.rs:1592:5            std::net::Ipv6Addr               const fn is_multicast(&self) -> bool;
+std/src/os/unix/net/addr.rs:160:5   std::os::unix::net::SocketAddr   fn is_unnamed(&self) -> bool;
+std/src/path.rs:219:5               std::path::Prefix<'a>            fn is_verbatim(&self) -> bool;
+std/src/path.rs:251:1               std::path                        fn is_separator(c: char) -> bool;
+std/src/path.rs:2010:5              std::path::Path                  fn is_absolute(&self) -> bool;
+std/src/path.rs:2034:5              std::path::Path                  fn is_relative(&self) -> bool;
+std/src/path.rs:2060:5              std::path::Path                  fn has_root(&self) -> bool;
+std/src/path.rs:2696:5              std::path::Path                  fn is_file(&self) -> bool;
+std/src/path.rs:2722:5              std::path::Path                  fn is_dir(&self) -> bool;
+std/src/path.rs:2748:5              std::path::Path                  fn is_symlink(&self) -> bool;
+std/src/sync/barrier.rs:169:5       std::sync::BarrierWaitResult     fn is_leader(&self) -> bool;
+```
