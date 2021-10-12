@@ -553,11 +553,12 @@ std/src/path.rs:1986:5           std::path::Path         fn to_path_buf(&self) -
 
 #### Add #[must_use] to non-mutating verb methods
 
-```
+```rust
 alloc/src/rc.rs:2226:5           alloc::rc::Weak<T>     fn upgrade(&self) -> Option<Rc<T>>;
 alloc/src/sync.rs:894:5          alloc::sync::Arc<T>    fn downgrade(this: &Self) -> Weak<T>;
 alloc/src/sync.rs:1856:5         alloc::sync::Weak<T>   fn upgrade(&self) -> Option<Arc<T>>;
 core/src/alloc/layout.rs:115:5   core::alloc::Layout    const fn align(&self) -> usize;
+core/src/alloc/layout.rs:231:5   core::alloc::Layout    const fn padding_needed_for(&self, align: usize) -> usize;
 core/src/alloc/layout.rs:264:5   core::alloc::Layout    fn pad_to_align(&self) -> Layout;
 std/src/path.rs:2510:5           std::path::Path        fn display(&self) -> Display<'_>;
 ```
