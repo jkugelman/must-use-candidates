@@ -620,3 +620,78 @@ std/src/sync/barrier.rs:169:5       std::sync::BarrierWaitResult     fn is_leade
 ```rust
 alloc/src/sync.rs:895:5   alloc::sync::Rc<T>   fn downgrade(this: &Self) -> Weak<T>;
 ```
+
+#### Add #[must_use] to expensive computations #89835
+
+```rust
+alloc/src/collections/btree/set.rs:308:5   alloc::collections::btree_set::BTreeSet<T>   fn difference<'a>(&'a self, other: &'a BTreeSet<T>) -> Difference<'a, T>;
+alloc/src/collections/btree/set.rs:369:5   alloc::collections::btree_set::BTreeSet<T>   fn symmetric_difference<'a>(&'a self, other: &'a BTreeSet<T>) -> SymmetricDifference<'a, T>
+alloc/src/collections/btree/set.rs:397:5   alloc::collections::btree_set::BTreeSet<T>   fn intersection<'a>(&'a self, other: &'a BTreeSet<T>) -> Intersection<'a, T>;
+alloc/src/collections/btree/set.rs:448:5   alloc::collections::btree_set::BTreeSet<T>   fn union<'a>(&'a self, other: &'a BTreeSet<T>) -> Union<'a, T>;
+alloc/src/string.rs:555:5                  alloc::string::String                        fn from_utf8_lossy(v: &[u8]) -> Cow<'_, str>;
+alloc/src/string.rs:649:5                  alloc::string::String                        fn from_utf16_lossy(v: &[u16]) -> String;
+core/src/slice/ascii.rs:15:5               slice                                        fn is_ascii(&self) -> bool;
+core/src/slice/ascii.rs:25:5               slice                                        fn eq_ignore_ascii_case(&self, other: &[u8]) -> bool;
+core/src/slice/memchr.rs:41:1              core::slice                                  fn memchr(x: u8, text: &[u8]) -> Option<usize>;
+core/src/slice/memchr.rs:94:1              core::slice                                  fn memrchr(x: u8, text: &[u8]) -> Option<usize>;
+core/src/str/lossy.rs:24:5                 core::str::lossy::Utf8Lossy                  fn chunks(&self) -> Utf8LossyChunksIter<'_>;
+core/src/str/mod.rs:678:5                  str                                          fn chars(&self) -> Chars<'_>;
+core/src/str/mod.rs:735:5                  str                                          fn char_indices(&self) -> CharIndices<'_>;
+core/src/str/mod.rs:890:5                  str                                          fn lines(&self) -> Lines<'_>;
+core/src/str/mod.rs:899:5                  str                                          fn lines_any(&self) -> LinesAny<'_>;
+core/src/str/mod.rs:2236:5                 str                                          fn is_ascii(&self) -> bool;
+core/src/str/mod.rs:2257:5                 str                                          fn eq_ignore_ascii_case(&self, other: &str) -> bool;
+std/src/collections/hash/set.rs:512:5      std::collections::HashSet<T, S>              fn difference<'a>(&'a self, other: &'a HashSet<T, S>) -> Difference<'a, T, S>;
+std/src/collections/hash/set.rs:541:5      std::collections::HashSet<T, S>              fn symmetric_difference<'a>(&'a self, other: &'a HashSet<T, S>) -> SymmetricDifference<'a, T, S>
+std/src/collections/hash/set.rs:570:5      std::collections::HashSet<T, S>              fn intersection<'a>(&'a self, other: &'a HashSet<T, S>) -> Intersection<'a, T, S>;
+std/src/collections/hash/set.rs:600:5      std::collections::HashSet<T, S>              fn union<'a>(&'a self, other: &'a HashSet<T, S>) -> Union<'a, T, S>;
+std/src/ffi/os_str.rs:821:5                std::ffi::OsStr                              fn is_ascii(&self) -> bool;
+std/src/io/stdio.rs:489:5                  std::io::Stdin                               fn split(self, byte: u8) -> Split<StdinLock<'static>>;
+```
+
+#### Add #[must_use] to mem/ptr functions #89839
+
+```rust
+core/src/mem/mod.rs:303:1        core::mem                 const fn size_of<T>() -> usize;
+core/src/mem/mod.rs:332:1        core::mem                 const fn size_of_val<T: ?Sized>(val: &T) -> usize;
+core/src/mem/mod.rs:381:1        core::mem                 const unsafe fn size_of_val_raw<T: ?Sized>(val: *const T) -> usize;
+core/src/mem/mod.rs:402:1        core::mem                 fn min_align_of<T>() -> usize;
+core/src/mem/mod.rs:428:1        core::mem                 fn min_align_of_val<T: ?Sized>(val: &T) -> usize;
+core/src/mem/mod.rs:447:1        core::mem                 const fn align_of<T>() -> usize;
+core/src/mem/mod.rs:474:1        core::mem                 const fn align_of_val<T: ?Sized>(val: &T) -> usize;
+core/src/mem/mod.rs:520:1        core::mem                 const fn align_of_val_raw<T: ?Sized>(val: *const T) -> usize;
+core/src/mem/mod.rs:577:1        core::mem                 const fn needs_drop<T>() -> bool;
+core/src/mem/mod.rs:626:1        core::mem                 unsafe fn zeroed<T>() -> T;
+core/src/mem/mod.rs:662:1        core::mem                 unsafe fn uninitialized<T>() -> T;
+core/src/mem/mod.rs:955:1        core::mem                 const unsafe fn transmute_copy<T, U>(src: &T) -> U;
+core/src/mem/mod.rs:1056:1       core::mem                 const fn variant_count<T>() -> usize;
+core/src/ptr/mod.rs:211:1        core::ptr                 const fn null<T>() -> *const T;
+core/src/ptr/mod.rs:230:1        core::ptr                 const fn null_mut<T>() -> *mut T;
+core/src/ptr/non_null.rs:87:5    core::ptr::NonNull<T>     const fn dangling() -> Self;
+core/src/ptr/non_null.rs:418:5   core::ptr::NonNull<[T]>   const fn slice_from_raw_parts(data: NonNull<T>, len: usize) -> Self;
+core/src/ptr/unique.rs:72:5      core::ptr::Unique<T>      const fn dangling() -> Self;
+```
+
+#### Add #[must_use] to pure functions
+
+```rust
+core/src/char/methods.rs:572:5       char                     const fn len_utf8(self) -> usize;
+core/src/char/methods.rs:598:5       char                     const fn len_utf16(self) -> usize;
+core/src/char/methods.rs:1152:5      char                     const fn eq_ignore_ascii_case(&self, other: &char) -> bool;
+core/src/num/f32.rs:675:5            core::num::f32           fn max(self, other: f32) -> f32;
+core/src/num/f32.rs:691:5            core::num::f32           fn min(self, other: f32) -> f32;
+core/src/num/f32.rs:566:5            core::num::f32           const fn classify(self) -> FpCategory;
+core/src/num/f32.rs:626:5            core::num::f32           fn recip(self) -> f32;
+core/src/num/f64.rs:565:5            core::num::f64           const fn classify(self) -> FpCategory;
+core/src/num/f64.rs:639:5            core::num::f64           fn recip(self) -> f64;
+core/src/num/f64.rs:689:5            core::num::f64           fn max(self, other: f64) -> f64;
+core/src/num/f64.rs:705:5            core::num::f64           fn min(self, other: f64) -> f64;
+core/src/num/int_macros.rs:2521:9    $Int                     const fn min_value() -> Self;
+core/src/num/int_macros.rs:2534:9    $Int                     const fn max_value() -> Self;
+core/src/num/mod.rs:338:5            u8                       const fn eq_ignore_ascii_case(&self, other: &u8) -> bool;
+core/src/num/uint_macros.rs:2269:9   $Int                     const fn min_value();
+core/src/num/uint_macros.rs:2280:9   $Int                     const fn max_value();
+core/src/num/nonzero.rs:76:17        core::num::NonZero$Int   const fn get(self) -> $Int;
+std/src/f32.rs:713:5                 f32                      fn sin_cos(self) -> (f32, f32);
+std/src/f64.rs:715:5                 f64                      fn sin_cos(self) -> (f64, f64);
+```

@@ -1,39 +1,3 @@
-# Discarded guard
-
-```rust
-std/src/io/stdio.rs:489:5                                   std::io::Stdin                                              fn split(self, byte: u8) -> Split<StdinLock<'static>>;
-```
-
-# Expensive computations
-
-```rust
-alloc/src/collections/btree/set.rs:308:5                    alloc::collections::btree_set::BTreeSet<T>                  fn difference<'a>(&'a self, other: &'a BTreeSet<T>) -> Difference<'a, T>;
-alloc/src/collections/btree/set.rs:369:5                    alloc::collections::btree_set::BTreeSet<T>                  fn symmetric_difference<'a>(&'a self, other: &'a BTreeSet<T>) -> SymmetricDifference<'a, T>
-alloc/src/collections/btree/set.rs:397:5                    alloc::collections::btree_set::BTreeSet<T>                  fn intersection<'a>(&'a self, other: &'a BTreeSet<T>) -> Intersection<'a, T>;
-alloc/src/collections/btree/set.rs:448:5                    alloc::collections::btree_set::BTreeSet<T>                  fn union<'a>(&'a self, other: &'a BTreeSet<T>) -> Union<'a, T>;
-alloc/src/string.rs:555:5                                   alloc::string::String                                       fn from_utf8_lossy(v: &[u8]) -> Cow<'_, str>;
-alloc/src/string.rs:649:5                                   alloc::string::String                                       fn from_utf16_lossy(v: &[u16]) -> String;
-core/src/slice/ascii.rs:15:5                                slice                                                       fn is_ascii(&self) -> bool;
-core/src/slice/ascii.rs:25:5                                slice                                                       fn eq_ignore_ascii_case(&self, other: &[u8]) -> bool;
-core/src/slice/memchr.rs:41:1                               core::slice                                                 fn memchr(x: u8, text: &[u8]) -> Option<usize>;
-core/src/slice/memchr.rs:94:1                               core::slice                                                 fn memrchr(x: u8, text: &[u8]) -> Option<usize>;
-core/src/str/lossy.rs:24:5                                  core::str::lossy::Utf8Lossy                                 fn chunks(&self) -> Utf8LossyChunksIter<'_>;
-core/src/str/mod.rs:678:5                                   str                                                         fn chars(&self) -> Chars<'_>;
-core/src/str/mod.rs:735:5                                   str                                                         fn char_indices(&self) -> CharIndices<'_>;
-core/src/str/mod.rs:890:5                                   str                                                         fn lines(&self) -> Lines<'_>;
-core/src/str/mod.rs:899:5                                   str                                                         fn lines_any(&self) -> LinesAny<'_>;
-core/src/str/mod.rs:2236:5                                  str                                                         fn is_ascii(&self) -> bool;
-core/src/str/mod.rs:2257:5                                  str                                                         fn eq_ignore_ascii_case(&self, other: &str) -> bool;
-std/src/ffi/os_str.rs:821:5                                 std::ffi::OsStr                                             fn is_ascii(&self) -> bool;
-std/src/path.rs:2082:5                                      std::path::Path                                             fn parent(&self) -> Option<&Path>;
-std/src/path.rs:2123:5                                      std::path::Path                                             fn ancestors(&self) -> Ancestors<'_>;
-std/src/path.rs:2148:5                                      std::path::Path                                             fn file_name(&self) -> Option<&OsStr>;
-std/src/path.rs:2282:5                                      std::path::Path                                             fn file_stem(&self) -> Option<&OsStr>;
-std/src/path.rs:2315:5                                      std::path::Path                                             fn file_prefix(&self) -> Option<&OsStr>;
-std/src/path.rs:2339:5                                      std::path::Path                                             fn extension(&self) -> Option<&OsStr>;
-std/src/path.rs:2454:5                                      std::path::Path                                             fn components(&self) -> Components<'_>;
-```
-
 # Conversions
 
 ```rust
@@ -74,32 +38,6 @@ std/src/time.rs:336:5                                       std::time::Instant  
 std/src/time.rs:360:5                                       std::time::Instant                                          fn elapsed(&self) -> Duration;
 std/src/time.rs:466:5                                       std::time::SystemTime                                       fn now() -> SystemTime;
 std/src/time.rs:634:5                                       std::time::SystemTimeError                                  fn duration(&self) -> Duration;
-```
-
-# Pure functions
-
-```rust
-core/src/char/methods.rs:572:5                              char                                                        const fn len_utf8(self) -> usize;
-core/src/char/methods.rs:598:5                              char                                                        const fn len_utf16(self) -> usize;
-core/src/mem/mod.rs:303:1                                   core::mem                                                   const fn size_of<T>() -> usize;
-core/src/mem/mod.rs:402:1                                   core::mem                                                   fn min_align_of<T>() -> usize;
-core/src/mem/mod.rs:447:1                                   core::mem                                                   const fn align_of<T>() -> usize;
-core/src/mem/mod.rs:577:1                                   core::mem                                                   const fn needs_drop<T>() -> bool;
-core/src/num/f32.rs:675:5                                   core::num::f32                                              fn max(self, other: f32) -> f32;
-core/src/num/f32.rs:691:5                                   core::num::f32                                              fn min(self, other: f32) -> f32;
-core/src/num/int_macros.rs:2521:9                           $Int                                                        const fn min_value() -> Self;
-core/src/num/int_macros.rs:2534:9                           $Int                                                        const fn max_value() -> Self;
-core/src/num/f32.rs:566:5                                   core::num::f32                                              const fn classify(self) -> FpCategory;
-core/src/num/f32.rs:626:5                                   core::num::f32                                              fn recip(self) -> f32;
-core/src/num/f64.rs:565:5                                   core::num::f64                                              const fn classify(self) -> FpCategory;
-core/src/num/f64.rs:639:5                                   core::num::f64                                              fn recip(self) -> f64;
-core/src/num/f64.rs:689:5                                   core::num::f64                                              fn max(self, other: f64) -> f64;
-core/src/num/f64.rs:705:5                                   core::num::f64                                              fn min(self, other: f64) -> f64;
-core/src/num/uint_macros.rs:2269:9                          $Int                                                        const fn min_value();
-core/src/num/uint_macros.rs:2280:9                          $Int                                                        const fn max_value();
-core/src/num/nonzero.rs:76:17                               core::num::NonZero$Int                                      const fn get(self) -> $Int;
-std/src/f32.rs:713:5                                        f32                                                         fn sin_cos(self) -> (f32, f32);
-std/src/f64.rs:715:5                                        f64                                                         fn sin_cos(self) -> (f64, f64);
 ```
 
 # Getters
@@ -158,9 +96,16 @@ std/src/net/ip.rs:1701:5                                    std::net::Ipv6Addr  
 std/src/os/unix/net/ancillary.rs:428:5                      std::os::unix::net::SocketAncillary<'a>                     fn capacity(&self) -> usize;
 std/src/os/unix/net/ancillary.rs:446:5                      std::os::unix::net::SocketAncillary<'a>                     fn messages(&self) -> Messages<'_>;
 std/src/os/unix/net/ancillary.rs:474:5                      std::os::unix::net::SocketAncillary<'a>                     fn truncated(&self) -> bool;
-std/src/path.rs:2060:5                                      std::path::Path                                             fn has_root(&self) -> bool;
+std/src/path.rs:2082:5                                      std::path::Path                                             fn parent(&self) -> Option<&Path>;
+std/src/path.rs:2123:5                                      std::path::Path                                             fn ancestors(&self) -> Ancestors<'_>;
+std/src/path.rs:2148:5                                      std::path::Path                                             fn file_name(&self) -> Option<&OsStr>;
+std/src/path.rs:2282:5                                      std::path::Path                                             fn file_stem(&self) -> Option<&OsStr>;
+std/src/path.rs:2315:5                                      std::path::Path                                             fn file_prefix(&self) -> Option<&OsStr>;
+std/src/path.rs:2339:5                                      std::path::Path                                             fn extension(&self) -> Option<&OsStr>;
+std/src/path.rs:2454:5                                      std::path::Path                                             fn components(&self) -> Components<'_>;
 std/src/path.rs:2488:5                                      std::path::Path                                             fn iter(&self) -> Iter<'_>;
 std/src/path.rs:2638:5                                      std::path::Path                                             fn exists(&self) -> bool;
+
 
 std/src/os/unix/net/ancillary.rs:204:5                      std::os::unix::net::SocketCred                              fn get_pid(&self) -> libc::pid_t;
 std/src/os/unix/net/ancillary.rs:216:5                      std::os::unix::net::SocketCred                              fn get_uid(&self) -> libc::uid_t;
@@ -216,8 +161,6 @@ core/src/num/error.rs:118:5                                     core::num::Parse
 core/src/num/f32.rs:959:5                                       core::num::f32                                              fn total_cmp(&self, other: &Self) -> crate::cmp::Ordering;
 core/src/num/f64.rs:973:5                                       core::num::f64                                              fn total_cmp(&self, other: &Self) -> crate::cmp::Ordering;
 core/src/num/mod.rs:338:5                                       u8                                                          const fn eq_ignore_ascii_case(&self, other: &u8) -> bool;
-core/src/num/saturating.rs:757:13                               core::num::Saturating<$Int>                                 fn pow(self, exp: u32) -> Self;
-core/src/num/wrapping.rs:751:13                                 core::num::Wrapping<$Int>                                   fn pow(self, exp: u32) -> Self;
 core/src/panic/location.rs:179:5                                core::panic::Location<'a>                                   const fn internal_constructor(file: &'a str, line: u32, col: u32) -> Self;
 core/src/panic/panic_info.rs:44:5                               core::panic::PanicInfo<'a>                                  fn internal_constructor(message: Option<&'a fmt::Arguments<'a>>, location: &'a Location<'a>) -> Self;
 core/src/ptr/mod.rs:211:1                                       core::mem                                                   const fn null<T>() -> *const T;
