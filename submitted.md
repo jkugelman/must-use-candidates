@@ -695,3 +695,61 @@ core/src/num/nonzero.rs:76:17        core::num::NonZero$Int   const fn get(self)
 std/src/f32.rs:713:5                 f32                      fn sin_cos(self) -> (f32, f32);
 std/src/f64.rs:715:5                 f64                      fn sin_cos(self) -> (f64, f64);
 ```
+
+#### Add #[must_use] to remaining core functions #89897
+
+```rust
+core/src/alloc/layout.rs:107:5        core::alloc::Layout                  const fn size(&self) -> usize;
+core/src/alloc/layout.rs:143:5        core::alloc::Layout                  fn for_value<T: ?Sized>(t: &T) -> Self;
+core/src/alloc/layout.rs:177:5        core::alloc::Layout                  unsafe fn for_value_raw<T: ?Sized>(t: *const T) -> Self;
+core/src/alloc/layout.rs:187:5        core::alloc::Layout                  const fn dangling(&self) -> NonNull<u8>;
+core/src/any.rs:463:5                 core::any::TypeId                    const fn of<T: ?Sized + 'static>() -> TypeId;
+core/src/any.rs:497:1                 core::any                            const fn type_name<T: ?Sized>() -> &'static str;
+core/src/any.rs:542:1                 core::any                            const fn type_name_of_val<T: ?Sized>(_val: &T) -> &'static str;
+core/src/ascii.rs:91:1                core::ascii                          fn escape_default(c: u8) -> EscapeDefault;
+core/src/cell.rs:1337:5               core::cell::Ref<'b, T>               fn clone(orig: &Ref<'b, T>) -> Ref<'b, T>;
+core/src/cell.rs:1363:5               core::cell::Ref<'b, T>               fn map<U: ?Sized, F>(orig: Ref<'b, T>, f: F) -> Ref<'b, T>;
+core/src/cell.rs:1427:5               core::cell::Ref<'b, T>               fn map_split<U: ?Sized, V: ?Sized, F>(orig: Ref<'b, T>, f: F) -> (Ref<'b, U>, Ref<'b, V>);
+core/src/char/decode.rs:132:5         core::char::DecodeUtf16Error         fn unpaired_surrogate(&self) -> u16;
+core/src/default.rs:159:1             core::default::Default               fn default<T: Default>() -> T;
+core/src/fmt/mod.rs:1626:5            core::fmt::Formatter<'a>             fn flags(&self) -> u32;
+core/src/fmt/mod.rs:1658:5            core::fmt::Formatter<'a>             fn fill(&self) -> char;
+core/src/fmt/mod.rs:1694:5            core::fmt::Formatter<'a>             fn align(&self) -> Option<Alignment>;
+core/src/fmt/mod.rs:1728:5            core::fmt::Formatter<'a>             fn width(&self) -> Option<usize>;
+core/src/fmt/mod.rs:1758:5            core::fmt::Formatter<'a>             fn precision(&self) -> Option<usize>;
+core/src/fmt/mod.rs:1788:5            core::fmt::Formatter<'a>             fn sign_plus(&self) -> bool;
+core/src/fmt/mod.rs:1816:5            core::fmt::Formatter<'a>             fn sign_minus(&self) -> bool;
+core/src/fmt/mod.rs:1843:5            core::fmt::Formatter<'a>             fn alternate(&self) -> bool;
+core/src/fmt/mod.rs:1868:5            core::fmt::Formatter<'a>             fn sign_aware_zero_pad(&self) -> bool;
+core/src/future/mod.rs:94:1           core::future                         unsafe fn get_context<'a, 'b>(cx: ResumeTy) -> &'a mut Context<'b>;
+core/src/iter/sources/empty.rs:21:1   core::iter                           const fn empty<T>() -> Empty<T>;
+core/src/num/error.rs:118:5           core::num::ParseIntError             fn kind(&self) -> &IntErrorKind;
+core/src/num/f32.rs:959:5             core::num::f32                       fn total_cmp(&self, other: &Self) -> crate::cmp::Ordering;
+core/src/num/f64.rs:973:5             core::num::f64                       fn total_cmp(&self, other: &Self) -> crate::cmp::Ordering;
+core/src/ops/range.rs:747:5           core::ops::Bound<&T>                 fn cloned(self) -> Bound<T>;
+core/src/option.rs:1453:5             core::option::Option<&T>             const fn copied(self) -> Option<T>;
+core/src/panic/location.rs:85:5       core::panic::Location<'a>            const fn caller() -> &'static Location<'static>;
+core/src/panic/location.rs:123:5      core::panic::Location<'a>            fn file(&self) -> &str;
+core/src/panic/location.rs:145:5      core::panic::Location<'a>            fn line(&self) -> u32;
+core/src/panic/location.rs:167:5      core::panic::Location<'a>            fn column(&self) -> u32;
+core/src/panic/panic_info.rs:85:5     core::panic::PanicInfo<'a>           fn payload(&self) -> &(dyn Any + Send);
+core/src/panic/panic_info.rs:93:5     core::panic::PanicInfo<'a>           fn message(&self) -> Option<&fmt::Arguments<'_>>;
+core/src/panic/panic_info.rs:122:5    core::panic::PanicInfo<'a>           fn location(&self) -> Option<&Location<'_>>;
+core/src/pin.rs:710:5                 core::pin::Pin<&'a T>                const fn get_ref(self) -> &'a T;
+core/src/slice/iter.rs:1715:5         core::slice::ChunksExact<'a, T>      fn remainder(&self) -> &'a [T];
+core/src/slice/iter.rs:2143:5         core::slice::ArrayChunks<'a, T, N>   fn remainder(&self) -> &'a [T];
+core/src/slice/iter.rs:2717:5         core::slice::RChunksExact<'a, T>     fn remainder(&self) -> &'a [T];
+core/src/str/error.rs:76:5            core::str::Utf8Error                 fn valid_up_to(&self) -> usize;
+core/src/str/error.rs:97:5            core::str::Utf8Error                 fn error_len(&self) -> Option<usize>;
+core/src/str/iter.rs:213:5            core::str::CharIndices<'a>           fn offset(&self) -> usize;
+core/src/str/mod.rs:497:5             str                                  unsafe fn slice_unchecked(&self, begin: usize, end: usize) -> &str;
+core/src/str/mod.rs:569:5             str                                  fn split_at(&self, mid: usize) -> (&str, &str);
+core/src/str/mod.rs:619:5             str                                  fn split_at_mut(&mut self, mid: usize) -> (&mut str, &mut str);
+core/src/str/mod.rs:760:5             str                                  fn bytes(&self) -> Bytes<'_>;
+core/src/str/validations.rs:255:1     core::str                            fn utf8_char_width(b: u8) -> usize;
+core/src/task/wake.rs:169:5           core::task::Context<'a>              fn waker(&self) -> &'a Waker;
+core/src/task/wake.rs:244:5           core::task::Waker                    fn will_wake(&self, other: &Waker) -> bool;
+core/src/time.rs:354:5                core::time::Duration                 const fn subsec_millis(&self) -> u32;
+core/src/time.rs:376:5                core::time::Duration                 const fn subsec_micros(&self) -> u32;
+core/src/time.rs:398:5                core::time::Duration                 const fn subsec_nanos(&self) -> u32;
+```
