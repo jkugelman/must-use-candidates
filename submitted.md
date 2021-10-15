@@ -753,3 +753,66 @@ core/src/time.rs:354:5                core::time::Duration                 const
 core/src/time.rs:376:5                core::time::Duration                 const fn subsec_micros(&self) -> u32;
 core/src/time.rs:398:5                core::time::Duration                 const fn subsec_nanos(&self) -> u32;
 ```
+
+Add #[must_use] to remaining alloc functions #89899
+
+```rust
+alloc/src/collections/binary_heap.rs:514:5       alloc::collections::binary_heap::BinaryHeap<T>           fn into_sorted_vec(mut self) -> Vec<T>;
+alloc/src/collections/binary_heap.rs:833:5       alloc::collections::binary_heap::BinaryHeap<T>           fn iter(&self) -> Iter<'_, T>;
+alloc/src/collections/binary_heap.rs:878:5       alloc::collections::binary_heap::BinaryHeap<T>           fn peek(&self) -> Option<&T>;
+alloc/src/collections/binary_heap.rs:895:5       alloc::collections::binary_heap::BinaryHeap<T>           fn capacity(&self) -> usize;
+alloc/src/collections/btree/map.rs:1062:5        alloc::collections::btree_map::BTreeMap<K, V>            fn range<T: ?Sized, R>(&self, range: R) -> Range<'_, K, V>;
+alloc/src/collections/btree/map.rs:1106:5        alloc::collections::btree_map::BTreeMap<K, V>            fn range_mut<T: ?Sized, R>(&mut self, range: R) -> RangeMut<'_, K, V>;
+alloc/src/collections/btree/map.rs:2081:5        alloc::collections::btree_map::BTreeMap<K, V>            fn iter(&self) -> Iter<'_, K, V>;
+alloc/src/collections/btree/map.rs:2125:5        alloc::collections::btree_map::BTreeMap<K, V>            fn iter_mut(&mut self) -> IterMut<'_, K, V>;
+alloc/src/collections/btree/map.rs:2140:5        alloc::collections::btree_map::BTreeMap<K, V>            fn keys(&self) -> Keys<'_, K, V>;
+alloc/src/collections/btree/map.rs:2161:5        alloc::collections::btree_map::BTreeMap<K, V>            fn values(&self) -> Values<'_, K, V>;
+alloc/src/collections/btree/map.rs:2199:5        alloc::collections::btree_map::BTreeMap<K, V>            fn values_mut(&mut self) -> ValuesMut<'_, K, V>;
+alloc/src/collections/btree/map/entry.rs:351:5   alloc::collections::btree_map::OccupiedEntry<'a, K, V>   fn key(&self) -> &K;
+alloc/src/collections/btree/map/entry.rs:395:5   alloc::collections::btree_map::OccupiedEntry<'a, K, V>   fn get(&self) -> &V;
+alloc/src/collections/btree/set.rs:281:5         alloc::collections::btree_set::BTreeSet<T>               fn range<K: ?Sized, R>(&self, range: R) -> Range<'_, T>;
+alloc/src/collections/btree/set.rs:668:5         alloc::collections::btree_set::BTreeSet<T>               fn first(&self) -> Option<&T>;
+alloc/src/collections/btree/set.rs:694:5         alloc::collections::btree_set::BTreeSet<T>               fn last(&self) -> Option<&T>;
+alloc/src/collections/btree/set.rs:1017:5        alloc::collections::btree_set::BTreeSet<T>               fn iter(&self) -> Iter<'_, T>;
+alloc/src/collections/linked_list.rs:494:5       alloc::collections::linked_list::LinkedList<T>           fn iter(&self) -> Iter<'_, T>;
+alloc/src/collections/linked_list.rs:525:5       alloc::collections::linked_list::LinkedList<T>           fn iter_mut(&mut self) -> IterMut<'_, T>;
+alloc/src/collections/linked_list.rs:532:5       alloc::collections::linked_list::LinkedList<T>           fn cursor_front(&self) -> Cursor<'_, T>;
+alloc/src/collections/linked_list.rs:546:5       alloc::collections::linked_list::LinkedList<T>           fn cursor_front_mut(&mut self) -> CursorMut<'_, T>;
+alloc/src/collections/linked_list.rs:550:5       alloc::collections::linked_list::LinkedList<T>           fn cursor_back(&self) -> Cursor<'_, T>;
+alloc/src/collections/linked_list.rs:564:5       alloc::collections::linked_list::LinkedList<T>           fn cursor_back_mut(&mut self) -> CursorMut<'_, T>;
+alloc/src/collections/linked_list.rs:681:5       alloc::collections::linked_list::LinkedList<T>           fn front(&self) -> Option<&T>;
+alloc/src/collections/linked_list.rs:717:5       alloc::collections::linked_list::LinkedList<T>           fn front_mut(&mut self) -> Option<&mut T>;
+alloc/src/collections/linked_list.rs:731:5       alloc::collections::linked_list::LinkedList<T>           fn back(&self) -> Option<&T>;
+alloc/src/collections/linked_list.rs:769:5       alloc::collections::linked_list::LinkedList<T>           fn back_mut(&mut self) -> Option<&mut T>;
+alloc/src/collections/linked_list.rs:1181:5      alloc::collections::linked_list::Cursor<'a, T>           fn index(&self) -> Option<usize>;
+alloc/src/collections/linked_list.rs:1235:5      alloc::collections::linked_list::Cursor<'a, T>           fn current(&self) -> Option<&'a T>;
+alloc/src/collections/linked_list.rs:1245:5      alloc::collections::linked_list::Cursor<'a, T>           fn peek_next(&self) -> Option<&'a T>;
+alloc/src/collections/linked_list.rs:1261:5      alloc::collections::linked_list::Cursor<'a, T>           fn peek_prev(&self) -> Option<&'a T>;
+alloc/src/collections/linked_list.rs:1274:5      alloc::collections::linked_list::Cursor<'a, T>           fn front(&self) -> Option<&'a T>;
+alloc/src/collections/linked_list.rs:1281:5      alloc::collections::linked_list::Cursor<'a, T>           fn back(&self) -> Option<&'a T>;
+alloc/src/collections/linked_list.rs:1292:5      alloc::collections::linked_list::CursorMut<'a, T>        fn index(&self) -> Option<usize>;
+alloc/src/collections/linked_list.rs:1364:5      alloc::collections::linked_list::CursorMut<'a, T>        fn current(&mut self) -> Option<&mut T>;
+alloc/src/collections/linked_list.rs:1374:5      alloc::collections::linked_list::CursorMut<'a, T>        fn peek_next(&mut self) -> Option<&mut T>;
+alloc/src/collections/linked_list.rs:1390:5      alloc::collections::linked_list::CursorMut<'a, T>        fn peek_prev(&mut self) -> Option<&mut T>;
+alloc/src/collections/linked_list.rs:1633:5      alloc::collections::linked_list::CursorMut<'a, T>        fn front(&self) -> Option<&T>;
+alloc/src/collections/linked_list.rs:1661:5      alloc::collections::linked_list::CursorMut<'a, T>        fn front_mut(&mut self) -> Option<&mut T>;
+alloc/src/collections/linked_list.rs:1647:5      alloc::collections::linked_list::CursorMut<'a, T>        fn back(&self) -> Option<&T>;
+alloc/src/collections/linked_list.rs:1696:5      alloc::collections::linked_list::CursorMut<'a, T>        fn back_mut(&mut self) -> Option<&mut T>;
+alloc/src/collections/mod.rs:73:5                alloc::collections::TryReserveError                      fn kind(&self) -> TryReserveErrorKind;
+alloc/src/fmt.rs:576:1                           alloc::fmt                                               fn format(args: Arguments<'_>) -> string::String;
+alloc/src/rc.rs:2240:5                           alloc::rc::Weak<T>                                       fn strong_count(&self) -> usize;
+alloc/src/rc.rs:2248:5                           alloc::rc::Weak<T>                                       fn weak_count(&self) -> usize;
+alloc/src/rc.rs:2318:5                           alloc::rc::Weak<T>                                       fn ptr_eq(&self, other: &Self) -> bool;
+alloc/src/str.rs:247:5                           str                                                      fn into_boxed_bytes(self: Box<str>) -> Box<[u8]>;
+alloc/src/str.rs:484:5                           str                                                      fn into_string(self: Box<str>) -> String;
+alloc/src/str.rs:511:5                           str                                                      fn repeat(&self, n: usize) -> String;
+alloc/src/string.rs:895:5                        alloc::string::String                                    fn capacity(&self) -> usize;
+alloc/src/string.rs:1815:5                       alloc::string::FromUtf8Error                             fn utf8_error(&self) -> Utf8Error;
+alloc/src/sync.rs:947:5                          alloc::sync::Arc<T>                                      fn weak_count(this: &Self) -> usize;
+alloc/src/sync.rs:976:5                          alloc::sync::Arc<T>                                      fn strong_count(this: &Self) -> usize;
+alloc/src/sync.rs:1091:5                         alloc::sync::Arc<T>                                      fn ptr_eq(this: &Self, other: &Self) -> bool;
+alloc/src/sync.rs:1893:5                         alloc::sync::Weak<T>                                     fn strong_count(&self) -> usize;
+alloc/src/sync.rs:1909:5                         alloc::sync::Weak<T>                                     fn weak_count(&self) -> usize;
+alloc/src/sync.rs:1988:5                         alloc::sync::Weak<T>                                     fn ptr_eq(&self, other: &Self) -> bool;
+alloc/src/vec/drain.rs:63:5                      alloc::vec::Drain<'a, T, A>                              fn allocator(&self) -> &A;
+```
