@@ -754,7 +754,7 @@ core/src/time.rs:376:5                core::time::Duration                 const
 core/src/time.rs:398:5                core::time::Duration                 const fn subsec_nanos(&self) -> u32;
 ```
 
-Add #[must_use] to remaining alloc functions #89899
+#### Add #[must_use] to remaining alloc functions #89899
 
 ```rust
 alloc/src/collections/binary_heap.rs:514:5       alloc::collections::binary_heap::BinaryHeap<T>           fn into_sorted_vec(mut self) -> Vec<T>;
@@ -817,7 +817,7 @@ alloc/src/sync.rs:1988:5                         alloc::sync::Weak<T>           
 alloc/src/vec/drain.rs:63:5                      alloc::vec::Drain<'a, T, A>                              fn allocator(&self) -> &A;
 ```
 
-Add #[must_use] to alloc functions that would leak memory #90427
+#### Add #[must_use] to alloc functions that would leak memory #90427
 
 ```rust
 alloc/src/alloc.rs:85:1    alloc                 unsafe fn alloc(layout: Layout) -> *mut u8;
@@ -826,7 +826,7 @@ alloc/src/alloc.rs:154:1   alloc                 unsafe fn alloc_zeroed(layout: 
 alloc/src/sync.rs:801:5    alloc::sync::Arc<T>   fn into_raw(this: Self) -> *const T;
 ```
 
-Add #[must_use] to remaining std functions (A-N) #90430
+#### Add #[must_use] to remaining std functions (A-N) #90430
 
 ```rust
 std/src/backtrace.rs:291:5               std::backtrace::Backtrace                                   fn capture() -> Backtrace;
@@ -886,4 +886,64 @@ std/src/net/ip.rs:1257:5                 std::net::Ipv6Addr                     
 std/src/net/ip.rs:1558:5                 std::net::Ipv6Addr                                          const fn multicast_scope(&self) -> Option<Ipv6MulticastScope>;
 std/src/net/ip.rs:1701:5                 std::net::Ipv6Addr                                          const fn octets(&self) -> [u8; 16];
 std/src/net/tcp.rs:856:5                 std::net::TcpListener                                       fn incoming(&self) -> Incoming<'_>;
+```
+
+#### Add #[must_use] to remaining std functions (O-Z) #90431
+
+```rust
+std/src/os/unix/net/ancillary.rs:204:5   std::os::unix::net::SocketCred            fn get_pid(&self) -> libc::pid_t;
+std/src/os/unix/net/ancillary.rs:216:5   std::os::unix::net::SocketCred            fn get_uid(&self) -> libc::uid_t;
+std/src/os/unix/net/ancillary.rs:228:5   std::os::unix::net::SocketCred            fn get_gid(&self) -> libc::gid_t;
+std/src/os/unix/net/ancillary.rs:428:5   std::os::unix::net::SocketAncillary<'a>   fn capacity(&self) -> usize;
+std/src/os/unix/net/ancillary.rs:446:5   std::os::unix::net::SocketAncillary<'a>   fn messages(&self) -> Messages<'_>;
+std/src/os/unix/net/ancillary.rs:474:5   std::os::unix::net::SocketAncillary<'a>   fn truncated(&self) -> bool;
+std/src/os/unix/net/listener.rs:236:5    std::os::unix::net::UnixListener          fn incoming(&self) -> Incoming<'_>;
+std/src/os/unix/process.rs:440:1         std::os::unix::process                    fn parent_id() -> u32;
+std/src/panicking.rs:164:1               std::panicking                            fn take_hook() -> Box<dyn Fn(&PanicInfo<'_>) + 'static + Sync + Send>;
+std/src/panicking.rs:287:5               std::panicking::panic_count               fn get_count() -> usize;
+std/src/panicking.rs:293:5               std::panicking::panic_count               fn count_is_zero() -> bool;
+std/src/path.rs:424:5                    std::path::PrefixComponent<'a>            fn kind(&self) -> Prefix<'a>;
+std/src/path.rs:1449:5                   std::path::PathBuf                        fn capacity(&self) -> usize;
+std/src/path.rs:2082:5                   std::path::Path                           fn parent(&self) -> Option<&Path>;
+std/src/path.rs:2123:5                   std::path::Path                           fn ancestors(&self) -> Ancestors<'_>;
+std/src/path.rs:2148:5                   std::path::Path                           fn file_name(&self) -> Option<&OsStr>;
+std/src/path.rs:2250:5                   std::path::Path                           fn starts_with<P: AsRef<Path>>(&self, base: P) -> bool;
+std/src/path.rs:2276:5                   std::path::Path                           fn ends_with<P: AsRef<Path>>(&self, child: P) -> bool;
+std/src/path.rs:2282:5                   std::path::Path                           fn file_stem(&self) -> Option<&OsStr>;
+std/src/path.rs:2315:5                   std::path::Path                           fn file_prefix(&self) -> Option<&OsStr>;
+std/src/path.rs:2339:5                   std::path::Path                           fn extension(&self) -> Option<&OsStr>;
+std/src/path.rs:2417:5                   std::path::Path                           fn with_file_name<S: AsRef<OsStr>>(&self, file_name: S) -> PathBuf;
+std/src/path.rs:2445:5                   std::path::Path                           fn with_extension<S: AsRef<OsStr>>(&self, extension: S) -> PathBuf;
+std/src/path.rs:2454:5                   std::path::Path                           fn components(&self) -> Components<'_>;
+std/src/path.rs:2488:5                   std::path::Path                           fn iter(&self) -> Iter<'_>;
+std/src/path.rs:2638:5                   std::path::Path                           fn exists(&self) -> bool;
+std/src/path.rs:2755:5                   std::path::Path                           fn into_path_buf(self: Box<Path>) -> PathBuf;
+std/src/process.rs:953:5                 std::process::Command                     fn get_program(&self) -> &OsStr;
+std/src/process.rs:976:5                 std::process::Command                     fn get_args(&self) -> CommandArgs<'_>;
+std/src/process.rs:1008:5                std::process::Command                     fn get_envs(&self) -> CommandEnvs<'_>;
+std/src/process.rs:1029:5                std::process::Command                     fn get_current_dir(&self) -> Option<&Path>;
+std/src/process.rs:1191:5                std::process::Stdio                       fn piped() -> Stdio;
+std/src/process.rs:1230:5                std::process::Stdio                       fn inherit() -> Stdio;
+std/src/process.rs:1269:5                std::process::Stdio                       fn null() -> Stdio;
+std/src/process.rs:1470:5                std::process::ExitStatus                  fn success(&self) -> bool;
+std/src/process.rs:1501:5                std::process::ExitStatus                  fn code(&self) -> Option<i32>;
+std/src/process.rs:1612:5                std::process::ExitStatusError             fn code_nonzero(&self) -> Option<NonZeroI32>;
+std/src/process.rs:1617:5                std::process::ExitStatusError             fn into_status(&self) -> ExitStatus;
+std/src/process.rs:1726:5                std::process::Child                       fn id(&self) -> u32;
+std/src/process.rs:1996:1                std::process                              fn id() -> u32;
+std/src/sync/condvar.rs:65:5             std::sync::WaitTimeoutResult              fn timed_out(&self) -> bool;
+std/src/sync/mpsc/mod.rs:711:1           std::sync::mpsc                           fn channel<T>() -> (Sender<T>, Receiver<T>);
+std/src/sync/mpsc/mod.rs:759:1           std::sync::mpsc                           fn sync_channel<T>(bound: usize) -> (SyncSender<T>, Receiver<T>);
+std/src/thread/mod.rs:653:1              std::thread                               fn current() -> Thread;
+std/src/thread/mod.rs:741:1              std::thread                               fn panicking() -> bool;
+std/src/thread/mod.rs:1133:5             std::thread::Thread                       fn id(&self) -> ThreadId;
+std/src/thread/mod.rs:1175:5             std::thread::Thread                       fn name(&self) -> Option<&str>;
+std/src/thread/mod.rs:1362:5             std::thread::JoinHandle<T>                fn thread(&self) -> &Thread;
+std/src/time.rs:243:5                    std::time::Instant                        fn now() -> Instant;
+std/src/time.rs:296:5                    std::time::Instant                        fn duration_since(&self, earlier: Instant) -> Duration;
+std/src/time.rs:316:5                    std::time::Instant                        fn checked_duration_since(&self, earlier: Instant) -> Option<Duration>;
+std/src/time.rs:336:5                    std::time::Instant                        fn saturating_duration_since(&self, earlier: Instant) -> Duration;
+std/src/time.rs:360:5                    std::time::Instant                        fn elapsed(&self) -> Duration;
+std/src/time.rs:466:5                    std::time::SystemTime                     fn now() -> SystemTime;
+std/src/time.rs:634:5                    std::time::SystemTimeError                fn duration(&self) -> Duration;
 ```
