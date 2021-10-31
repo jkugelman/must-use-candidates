@@ -816,3 +816,12 @@ alloc/src/sync.rs:1909:5                         alloc::sync::Weak<T>           
 alloc/src/sync.rs:1988:5                         alloc::sync::Weak<T>                                     fn ptr_eq(&self, other: &Self) -> bool;
 alloc/src/vec/drain.rs:63:5                      alloc::vec::Drain<'a, T, A>                              fn allocator(&self) -> &A;
 ```
+
+Add #[must_use] to alloc functions that would leak memory #90427
+
+```rust
+alloc/src/alloc.rs:85:1    alloc                 unsafe fn alloc(layout: Layout) -> *mut u8;
+alloc/src/alloc.rs:123:1   alloc                 unsafe fn realloc(ptr: *mut u8, layout: Layout, new_size: usize) -> *mut u8;
+alloc/src/alloc.rs:154:1   alloc                 unsafe fn alloc_zeroed(layout: Layout) -> *mut u8;
+alloc/src/sync.rs:801:5    alloc::sync::Arc<T>   fn into_raw(this: Self) -> *const T;
+```
